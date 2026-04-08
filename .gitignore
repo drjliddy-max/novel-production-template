@@ -1,0 +1,7 @@
+output/*
+!output/.gitkeep
+support/raw/*
+!support/raw/.gitkeep
+support/tmp/*
+!support/tmp/.gitkeep
+.DS_Store
