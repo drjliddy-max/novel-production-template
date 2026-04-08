@@ -5,3 +5,5 @@ support/raw/*
 support/tmp/*
 !support/tmp/.gitkeep
 .DS_Store
+__pycache__/
+*.pyc
