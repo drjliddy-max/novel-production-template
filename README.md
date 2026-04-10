@@ -15,15 +15,21 @@ This repository turns an unpublished novel from a source PDF into an editable, r
 The full PDF-to-KDP pipeline is novel-specific. The voice and editorial pieces (`style-guide/` and `prompts/`) are reusable across all of John Liddy's written work, including:
 
 - Books (long-form, full pipeline)
-- Blog articles (short-form, voice-aware drafting)
+- Blog articles and essays (short-form, voice-aware drafting)
 - Book chapters being edited (pass-based editing)
-- Outreach copy and emails
+- Outreach emails (ADA Audit Report and other correspondence)
+- Hero and landing page copy
+- Amazon book descriptions and blurbs
 
 For voice rules, read [`style-guide/JOHN_LIDDY_VOICE.md`](style-guide/JOHN_LIDDY_VOICE.md). It is the canonical source of truth for John's writing voice across every form.
 
-For drafting a new article, use [`prompts/ARTICLE_DRAFT_PROMPT.md`](prompts/ARTICLE_DRAFT_PROMPT.md).
+Editorial prompts by form:
 
-For editing a book chapter, use [`prompts/CHAPTER_EDIT_PROMPT.md`](prompts/CHAPTER_EDIT_PROMPT.md).
+- [`prompts/ARTICLE_DRAFT_PROMPT.md`](prompts/ARTICLE_DRAFT_PROMPT.md) — blog articles and essays
+- [`prompts/CHAPTER_EDIT_PROMPT.md`](prompts/CHAPTER_EDIT_PROMPT.md) — book chapters, multi-pass editing
+- [`prompts/EMAIL_OUTREACH_PROMPT.md`](prompts/EMAIL_OUTREACH_PROMPT.md) — outreach, follow-ups, replies (including ADA Audit Report mechanics)
+- [`prompts/HERO_COPY_PROMPT.md`](prompts/HERO_COPY_PROMPT.md) — hero sections, landing pages, About copy
+- [`prompts/BOOK_DESCRIPTION_PROMPT.md`](prompts/BOOK_DESCRIPTION_PROMPT.md) — Amazon descriptions, blurbs, author bios
 
 ## Recommended Tools
 

@@ -72,6 +72,41 @@ These are sentences that pass every rule and demonstrate the move. Use them as a
 
 Notice what they share. Short. Specific. Often a negation followed by what is. Often a flat statement that lands like a small punch. Never decorated. Never explained.
 
+## Voice across forms
+
+The voice rules are constant. The application varies by form. When drafting any of these forms for John, follow the form-specific notes below in addition to the rules above.
+
+### Articles and essays (1200-1800 words)
+
+Most narrative space he writes in. Open with a specific scene or image. Build through 4-6 H2 sections. Soft mid-article CTA after the first major insight. End with a closing turn that lands instead of summarizing. Stories prove concepts then move on. The participation effect framework can be referenced naturally where it earns its place. See `prompts/ARTICLE_DRAFT_PROMPT.md`.
+
+### Book chapters (2000-5000 words)
+
+Longest form. More room for development but the same voice rules apply. Chapters build on chapters, so continuity matters. Edit in passes (extraction, grammar, line edit, continuity, KDP prep). Never make developmental story changes without asking. Voice violations from the chapter author are flagged in `reviews/`, not silently rewritten. See `prompts/CHAPTER_EDIT_PROMPT.md`.
+
+### Outreach emails (under 200 words)
+
+Tightest practical form. Voice rules still apply but every sentence is load-bearing. Open with the actual purpose. Three short paragraphs maximum. One clear ask. Adapt tone to audience without losing voice. For ADA Audit Report outreach, lead with fix count not violation count, BCC drjliddy@gmail.com, and remember the Google review link. See `prompts/EMAIL_OUTREACH_PROMPT.md`.
+
+### Hero and landing copy (under 50 words for hero block)
+
+Tightest form he writes. Two seconds of reader attention. Headline names a real reader problem or outcome. Subhead adds the specific how. CTA is plain verb plus object. No abstract benefit language. No clever wordplay that sacrifices clarity. See `prompts/HERO_COPY_PROMPT.md`.
+
+### Book descriptions and blurbs (75-300 words)
+
+Hybrid form: honest enough to feel like the author, specific enough to convert. Hook, problem, promise, credibility, close. Banned phrases are non-negotiable removals: manifest, vibration, law of attraction, source, broadcasting. Required language for The Participation Effect: participation, probability, perception, emotional regulation, clarity, recognition, practical framework, practice. See `prompts/BOOK_DESCRIPTION_PROMPT.md`.
+
+### What stays constant across all forms
+
+- Open with the idea, no throat-clearing, no matter the form
+- Negate before revealing where it earns its keep
+- Specific vocabulary instead of abstract
+- No em dashes, no semicolons, no banned transitions
+- Voice of a smart friend talking honestly, not a teacher or a marketer
+- Read it out loud before shipping it
+
+The form changes. The voice does not.
+
 ## AI patterns to avoid
 
 If a draft has any of these, rewrite it before showing it to him:
