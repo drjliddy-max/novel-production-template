@@ -25,9 +25,16 @@ Convert the author's manuscript from source files into clean, chapter-based Mark
 ## Files To Respect
 
 - `PROJECT_RULES.md`
-- `style-guide/AUTHOR_VOICE.md`
+- `style-guide/AUTHOR_VOICE.md` (or `style-guide/JOHN_LIDDY_VOICE.md` for John Liddy's projects)
 - `AMAZON_KDP.md`
 - `reviews/continuity-log.md`
+
+## Voice (For John Liddy's Projects)
+
+When working in this repo for John Liddy's writing (books, articles, or any other form), read `style-guide/JOHN_LIDDY_VOICE.md` before making any edits or drafting any text. It is the canonical voice standard for all his written work across every surface. Voice violations are not acceptable. If a draft fails any rule in that file, rewrite it before showing it to him.
+
+For drafting articles, use `prompts/ARTICLE_DRAFT_PROMPT.md`.
+For editing book chapters, use `prompts/CHAPTER_EDIT_PROMPT.md`.
 
 ## When Unsure
 

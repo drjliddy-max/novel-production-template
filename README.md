@@ -10,6 +10,21 @@ This repository turns an unpublished novel from a source PDF into an editable, r
 - Track voice, continuity, and publishing requirements in project files
 - Export clean HTML and DOCX builds for review and Amazon KDP preparation
 
+## Scope
+
+The full PDF-to-KDP pipeline is novel-specific. The voice and editorial pieces (`style-guide/` and `prompts/`) are reusable across all of John Liddy's written work, including:
+
+- Books (long-form, full pipeline)
+- Blog articles (short-form, voice-aware drafting)
+- Book chapters being edited (pass-based editing)
+- Outreach copy and emails
+
+For voice rules, read [`style-guide/JOHN_LIDDY_VOICE.md`](style-guide/JOHN_LIDDY_VOICE.md). It is the canonical source of truth for John's writing voice across every form.
+
+For drafting a new article, use [`prompts/ARTICLE_DRAFT_PROMPT.md`](prompts/ARTICLE_DRAFT_PROMPT.md).
+
+For editing a book chapter, use [`prompts/CHAPTER_EDIT_PROMPT.md`](prompts/CHAPTER_EDIT_PROMPT.md).
+
 ## Recommended Tools
 
 - `git`
