@@ -6,7 +6,7 @@ If you are an AI assistant drafting or editing writing for John, read this file 
 
 ## Where this voice lives
 
-- Books: The Participation Effect (the-clarity-effect repo), The Broken Crown / The War for Paratua (the-war-for-paratua repo), and any future book
+- Books: The Participation Effect (the-participation-effect repo), The Broken Crown / The War for Paratua (the-war-for-paratua repo), and any future book
 - Articles: theparticipationeffect.com blog, adaauditreport.com blog, any other article surface
 - Emails: outreach, follow-up, and personal correspondence written on his behalf
 - Site copy: landing pages, About sections, hero text on every property in the ecosystem

@@ -1,6 +1,6 @@
 # Chapter Edit Prompt
 
-Use this prompt when editing a book chapter in John Liddy's voice. Suitable for any of his book projects (the-clarity-effect, the-war-for-paratua, future books) or for any author using this template who wants voice-aware editing.
+Use this prompt when editing a book chapter in John Liddy's voice. Suitable for any of his book projects (the-participation-effect, the-war-for-paratua, future books) or for any author using this template who wants voice-aware editing.
 
 ## How to use this prompt
 
