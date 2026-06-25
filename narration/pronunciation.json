@@ -1,4 +1,11 @@
 {
+  "bowed": {
+    "say": "bowwed",
+    "ipa": "",
+    "status": "confirmed",
+    "note": "/baUd/ rhymes with loud (bend-at-waist sense), NOT /boUd/ like code",
+    "source": "operator A/B, 2026-06-24"
+  },
   "Aerendyl": {
     "say": "Airrendil",
     "ipa": "",
