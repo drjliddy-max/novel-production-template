@@ -355,5 +355,40 @@
     "status": "confirmed",
     "note": "verb, sentence-initial",
     "source": "operator A/B, 2026-06-24"
+  },
+  "eat": {
+    "say": "eet",
+    "ipa": "",
+    "status": "confirmed",
+    "note": "long-E /iːt/, NOT 'ate' — operator caught the TTS saying 'ate' (queen's dinner line, Ch 1)",
+    "source": "operator A/B, 2026-06-24"
+  },
+  "Erulias": {
+    "say": "Eh roolee us",
+    "ipa": "",
+    "status": "candidate",
+    "note": "PROPOSED eh-ROO-lee-us; King Erulias Tregarth (Ch 1 Order history); pending operator A/B confirm",
+    "source": "book canon the-war-for-paratua Ch 1, added 2026-06-24"
+  },
+  "Jublican": {
+    "say": "Jooblican",
+    "ipa": "",
+    "status": "candidate",
+    "note": "PROPOSED JOO-bli-kun; King Jublican Tregarth (Ch 1 Order history); pending operator A/B confirm",
+    "source": "book canon the-war-for-paratua Ch 1, added 2026-06-24"
+  },
+  "Toras": {
+    "say": "Torahs",
+    "ipa": "",
+    "status": "candidate",
+    "note": "PROPOSED TOR-ahss; the Order's police-armies (Ch 1 Order history); pending operator A/B confirm",
+    "source": "book canon the-war-for-paratua Ch 1, added 2026-06-24"
+  },
+  "Ramatera": {
+    "say": "Rama tair ah",
+    "ipa": "",
+    "status": "candidate",
+    "note": "PROPOSED rah-mah-TAIR-ah; Order member, the Face of Ramatera (Ch 1/Ch 8); pending operator A/B confirm",
+    "source": "book canon the-war-for-paratua, added 2026-06-24"
   }
 }
