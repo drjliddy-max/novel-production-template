@@ -1,0 +1,352 @@
+{
+  "Aerendyl": {
+    "say": "Airrendil",
+    "ipa": "",
+    "status": "locked",
+    "note": "ER-un-dyl (first-syllable stress)",
+    "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
+  },
+  "Azarak": {
+    "say": "Azarack",
+    "ipa": "",
+    "status": "locked",
+    "note": "",
+    "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
+  },
+  "Jerial": {
+    "say": "Jerrial",
+    "ipa": "",
+    "status": "locked",
+    "note": "",
+    "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
+  },
+  "Kail": {
+    "say": "Kael",
+    "ipa": "",
+    "status": "locked",
+    "note": "",
+    "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
+  },
+  "Loric": {
+    "say": "Lorik",
+    "ipa": "",
+    "status": "locked",
+    "note": "",
+    "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
+  },
+  "Cirshe": {
+    "say": "Kirsha",
+    "ipa": "",
+    "status": "locked",
+    "note": "",
+    "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
+  },
+  "Cirshen": {
+    "say": "Kirshen",
+    "ipa": "",
+    "status": "locked",
+    "note": "",
+    "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
+  },
+  "Breetwo": {
+    "say": "Bree two",
+    "ipa": "",
+    "status": "locked",
+    "note": "BREE-too",
+    "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
+  },
+  "Thordin": {
+    "say": "Thorden",
+    "ipa": "",
+    "status": "locked",
+    "note": "",
+    "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
+  },
+  "Ravina": {
+    "say": "Ra Veena",
+    "ipa": "",
+    "status": "locked",
+    "note": "rah-VEE-na",
+    "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
+  },
+  "Moryn": {
+    "say": "Morin",
+    "ipa": "",
+    "status": "locked",
+    "note": "",
+    "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
+  },
+  "Luthan": {
+    "say": "Luthun",
+    "ipa": "",
+    "status": "locked",
+    "note": "",
+    "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
+  },
+  "Luthans": {
+    "say": "Luthuns",
+    "ipa": "",
+    "status": "locked",
+    "note": "",
+    "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
+  },
+  "Whiticar": {
+    "say": "Whitaker",
+    "ipa": "",
+    "status": "locked",
+    "note": "",
+    "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
+  },
+  "Secrulaur": {
+    "say": "Sekrulear",
+    "ipa": "",
+    "status": "locked",
+    "note": "",
+    "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
+  },
+  "Istarion": {
+    "say": "Istarian",
+    "ipa": "",
+    "status": "locked",
+    "note": "",
+    "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
+  },
+  "Efreeti": {
+    "say": "Ifrit",
+    "ipa": "",
+    "status": "locked",
+    "note": "",
+    "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
+  },
+  "Iomedae": {
+    "say": "Iomadday",
+    "ipa": "",
+    "status": "locked",
+    "note": "ee-oh-MAD-day",
+    "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
+  },
+  "Scourtin": {
+    "say": "Skortan",
+    "ipa": "",
+    "status": "locked",
+    "note": "",
+    "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
+  },
+  "Gregore": {
+    "say": "Gregor",
+    "ipa": "",
+    "status": "locked",
+    "note": "",
+    "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
+  },
+  "Meruum": {
+    "say": "Merum",
+    "ipa": "",
+    "status": "locked",
+    "note": "",
+    "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
+  },
+  "Cassitor": {
+    "say": "Cassator",
+    "ipa": "",
+    "status": "locked",
+    "note": "",
+    "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
+  },
+  "Calet": {
+    "say": "Calais",
+    "ipa": "",
+    "status": "locked",
+    "note": "",
+    "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
+  },
+  "Quasition": {
+    "say": "Quasidian",
+    "ipa": "",
+    "status": "locked",
+    "note": "",
+    "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
+  },
+  "Orapnil": {
+    "say": "Arapnel",
+    "ipa": "",
+    "status": "locked",
+    "note": "",
+    "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
+  },
+  "Nillia": {
+    "say": "Nilia",
+    "ipa": "",
+    "status": "locked",
+    "note": "",
+    "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
+  },
+  "Jherassin": {
+    "say": "Jairassin",
+    "ipa": "",
+    "status": "locked",
+    "note": "",
+    "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
+  },
+  "Dariticus": {
+    "say": "Deridicus",
+    "ipa": "",
+    "status": "locked",
+    "note": "",
+    "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
+  },
+  "Tyerka": {
+    "say": "Tierca",
+    "ipa": "",
+    "status": "locked",
+    "note": "",
+    "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
+  },
+  "Tolaris": {
+    "say": "Talaris",
+    "ipa": "",
+    "status": "locked",
+    "note": "",
+    "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
+  },
+  "Tindalos": {
+    "say": "Tyndalus",
+    "ipa": "",
+    "status": "locked",
+    "note": "",
+    "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
+  },
+  "Psibow": {
+    "say": "Saibo",
+    "ipa": "",
+    "status": "locked",
+    "note": "",
+    "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
+  },
+  "Jehranna": {
+    "say": "Gerona",
+    "ipa": "",
+    "status": "locked",
+    "note": "",
+    "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
+  },
+  "Hfera": {
+    "say": "Hephra",
+    "ipa": "",
+    "status": "locked",
+    "note": "",
+    "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
+  },
+  "Girallon": {
+    "say": "Girolon",
+    "ipa": "",
+    "status": "locked",
+    "note": "",
+    "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
+  },
+  "Aspirius": {
+    "say": "Asperius",
+    "ipa": "",
+    "status": "locked",
+    "note": "",
+    "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
+  },
+  "Arcrysts": {
+    "say": "Arcrists",
+    "ipa": "",
+    "status": "locked",
+    "note": "",
+    "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
+  },
+  "Arante": {
+    "say": "Orante",
+    "ipa": "",
+    "status": "locked",
+    "note": "",
+    "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
+  },
+  "Allaster": {
+    "say": "Alistair",
+    "ipa": "",
+    "status": "locked",
+    "note": "",
+    "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
+  },
+  "breath": {
+    "say": "breth",
+    "ipa": "",
+    "status": "locked",
+    "note": "",
+    "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
+  },
+  "breaths": {
+    "say": "breths",
+    "ipa": "",
+    "status": "locked",
+    "note": "",
+    "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
+  },
+  "geas": {
+    "say": "ghesh",
+    "ipa": "",
+    "status": "confirmed",
+    "note": "hard-G 'GESH' (like go/ghost)",
+    "source": "operator A/B, 2026-06-24"
+  },
+  "Geas": {
+    "say": "Ghesh",
+    "ipa": "",
+    "status": "confirmed",
+    "note": "hard-G 'GESH' (like go/ghost)",
+    "source": "operator A/B, 2026-06-24"
+  },
+  "Atar": {
+    "say": "Aytar",
+    "ipa": "",
+    "status": "confirmed",
+    "note": "AY-tar (long A, like ate)",
+    "source": "operator A/B, 2026-06-24"
+  },
+  "breathe": {
+    "say": "breethe",
+    "ipa": "",
+    "status": "confirmed",
+    "note": "verb: long-ee, like seethe",
+    "source": "operator A/B, 2026-06-24"
+  },
+  "breathed": {
+    "say": "breethed",
+    "ipa": "",
+    "status": "confirmed",
+    "note": "verb",
+    "source": "operator A/B, 2026-06-24"
+  },
+  "breathing": {
+    "say": "breething",
+    "ipa": "",
+    "status": "confirmed",
+    "note": "verb",
+    "source": "operator A/B, 2026-06-24"
+  },
+  "Breathe": {
+    "say": "Breethe",
+    "ipa": "",
+    "status": "confirmed",
+    "note": "verb, sentence-initial",
+    "source": "operator A/B, 2026-06-24"
+  },
+  "Breathed": {
+    "say": "Breethed",
+    "ipa": "",
+    "status": "confirmed",
+    "note": "verb, sentence-initial",
+    "source": "operator A/B, 2026-06-24"
+  },
+  "Breathing": {
+    "say": "Breething",
+    "ipa": "",
+    "status": "confirmed",
+    "note": "verb, sentence-initial",
+    "source": "operator A/B, 2026-06-24"
+  }
+}
