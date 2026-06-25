@@ -366,35 +366,35 @@
   "ten": {
     "say": "tenn",
     "ipa": "",
-    "status": "candidate",
+    "status": "draft",
     "note": "PROPOSED /tɛn/ as a word — operator caught the TTS reading 'ten' wrong ('he was ten', 'ten years old', Ch 1), 'as if in quotes' (spelled out T-E-N or wrong vowel). 'tenn' forces word-reading; pending operator A/B confirm. Whole-word \\bten\\b also catches 'ten-year-old' / 'ten years'.",
     "source": "book canon the-war-for-paratua Ch 1, added 2026-06-24"
   },
   "Erulias": {
     "say": "Eh roolee us",
     "ipa": "",
-    "status": "candidate",
+    "status": "draft",
     "note": "PROPOSED eh-ROO-lee-us; King Erulias Tregarth (Ch 1 Order history); pending operator A/B confirm",
     "source": "book canon the-war-for-paratua Ch 1, added 2026-06-24"
   },
   "Jublican": {
     "say": "Jooblican",
     "ipa": "",
-    "status": "candidate",
+    "status": "draft",
     "note": "PROPOSED JOO-bli-kun; King Jublican Tregarth (Ch 1 Order history); pending operator A/B confirm",
     "source": "book canon the-war-for-paratua Ch 1, added 2026-06-24"
   },
   "Toras": {
     "say": "Torahs",
     "ipa": "",
-    "status": "candidate",
+    "status": "draft",
     "note": "PROPOSED TOR-ahss; the Order's police-armies (Ch 1 Order history); pending operator A/B confirm",
     "source": "book canon the-war-for-paratua Ch 1, added 2026-06-24"
   },
   "Ramatera": {
     "say": "Rama tair ah",
     "ipa": "",
-    "status": "candidate",
+    "status": "draft",
     "note": "PROPOSED rah-mah-TAIR-ah; Order member, the Face of Ramatera (Ch 1/Ch 8); pending operator A/B confirm",
     "source": "book canon the-war-for-paratua, added 2026-06-24"
   }
