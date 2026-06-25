@@ -363,6 +363,13 @@
     "note": "long-E /iːt/, NOT 'ate' — operator caught the TTS saying 'ate' (queen's dinner line, Ch 1)",
     "source": "operator A/B, 2026-06-24"
   },
+  "ten": {
+    "say": "tenn",
+    "ipa": "",
+    "status": "candidate",
+    "note": "PROPOSED /tɛn/ as a word — operator caught the TTS reading 'ten' wrong ('he was ten', 'ten years old', Ch 1), 'as if in quotes' (spelled out T-E-N or wrong vowel). 'tenn' forces word-reading; pending operator A/B confirm. Whole-word \\bten\\b also catches 'ten-year-old' / 'ten years'.",
+    "source": "book canon the-war-for-paratua Ch 1, added 2026-06-24"
+  },
   "Erulias": {
     "say": "Eh roolee us",
     "ipa": "",
