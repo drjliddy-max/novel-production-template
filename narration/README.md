@@ -76,3 +76,18 @@ Each draft entry mirrors the master shape (`say` / `ipa` / `status` / `note` / `
 ## Status
 
 Seeded 2026-06-24 from the operator's locked Book I canon list (41 entries) + words ear-confirmed this session (`geas`, `Atar`, the `breathe` verb forms). `ipa` fields pending the CMU-dict batch fill (local-AI task).
+
+## Audiobook file tracking (current vs stale)
+
+`narration/audiobook-status.mjs` is the **method to know which voice files are current, stale, or
+invalid**, and to delete the obsolete ones so the disk holds only the correct set. Staleness is
+computed from each render's manifest hashes (`sourceSha256` + `lexiconSha256`) vs the current
+manuscript + this master lexicon. Run read-only, or `--apply` to sweep obsolete files:
+
+```bash
+node narration/audiobook-status.mjs <book>/audiobook/<book1> \
+  --manuscripts <book>/manuscripts/<book1> --lexicon narration/pronunciation.json [--apply]
+```
+
+Every render MUST stamp `sources.sourceSha256` + `lexiconSha256` into its `manifest.json` so its audio
+can be proven current. Full policy: each consumer's `audiobook/README.md` ("File management").
