@@ -62,6 +62,11 @@ for (const dir of chapterDirs) {
   if (!recSrc) { status = 'NO-PROVENANCE'; noProv++; }
   else if (curSrc && recSrc !== curSrc) { status = 'STALE (manuscript changed)'; stale++; }
   else if (recLex && recLex !== lexHash) { status = 'STALE (lexicon changed)'; stale++; }
+  // Settings drift: a render whose hashes match but whose render SETTINGS no longer
+  // match the standard is still effectively stale (it sounds wrong). The narration
+  // standard is one steady voice = quotes stripped; a render without it carries the
+  // dialogue voice-shift even though its source/lexicon are current.
+  else if (man.quotes_stripped !== true) { status = 'STALE-SETTINGS (no quote-strip)'; stale++; }
   else if (wavs.length < chunkNums.size) { status = `INCOMPLETE (${wavs.length}/${chunkNums.size})`; incomplete++; }
   else { status = 'CURRENT'; current++; }
 
