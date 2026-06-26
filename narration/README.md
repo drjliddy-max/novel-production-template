@@ -75,7 +75,7 @@ Each draft entry mirrors the master shape (`say` / `ipa` / `status` / `note` / `
 
 ## Status
 
-Seeded 2026-06-24 from the operator's locked Book I canon list (41 entries) + words ear-confirmed this session (`geas`, `Atar`, the `breathe` verb forms). `ipa` fields pending the CMU-dict batch fill (local-AI task).
+Seeded 2026-06-24 from the operator's locked Book I canon list (41 entries) + words ear-confirmed (`geas`, `Atar`, `bowed`, the `breath`/`breaths` noun fix). Note: the `breathe`/`breathed`/`breathing` VERB respelling was tried then removed 2026-06-26 — the engine voices the real word correctly (`breethe` wrongly gave the unvoiced *teeth* th); only the noun needs respelling. `ipa` fields pending the CMU-dict batch fill (local-AI task).
 
 ## Audiobook file tracking (current vs stale)
 
