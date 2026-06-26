@@ -314,48 +314,6 @@
     "note": "AY-tar (long A, like ate)",
     "source": "operator A/B, 2026-06-24"
   },
-  "breathe": {
-    "say": "breethe",
-    "ipa": "",
-    "status": "confirmed",
-    "note": "verb: long-ee, like seethe",
-    "source": "operator A/B, 2026-06-24"
-  },
-  "breathed": {
-    "say": "breethed",
-    "ipa": "",
-    "status": "confirmed",
-    "note": "verb",
-    "source": "operator A/B, 2026-06-24"
-  },
-  "breathing": {
-    "say": "breething",
-    "ipa": "",
-    "status": "confirmed",
-    "note": "verb",
-    "source": "operator A/B, 2026-06-24"
-  },
-  "Breathe": {
-    "say": "Breethe",
-    "ipa": "",
-    "status": "confirmed",
-    "note": "verb, sentence-initial",
-    "source": "operator A/B, 2026-06-24"
-  },
-  "Breathed": {
-    "say": "Breethed",
-    "ipa": "",
-    "status": "confirmed",
-    "note": "verb, sentence-initial",
-    "source": "operator A/B, 2026-06-24"
-  },
-  "Breathing": {
-    "say": "Breething",
-    "ipa": "",
-    "status": "confirmed",
-    "note": "verb, sentence-initial",
-    "source": "operator A/B, 2026-06-24"
-  },
   "eat": {
     "say": "eet",
     "ipa": "",
