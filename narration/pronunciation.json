@@ -355,19 +355,5 @@
     "status": "draft",
     "note": "PROPOSED rah-mah-TAIR-ah; Order member, the Face of Ramatera (Ch 1/Ch 8); pending operator A/B confirm",
     "source": "book canon the-war-for-paratua, added 2026-06-24"
-  },
-  "Enter": {
-    "say": "Entur",
-    "ipa": "",
-    "status": "confirmed",
-    "note": "EN-ter, no dragged R (bm_george is non-rhotic); short command",
-    "source": "operator A/B, 2026-06-26"
-  },
-  "enter": {
-    "say": "entur",
-    "ipa": "",
-    "status": "confirmed",
-    "note": "EN-ter, no dragged R",
-    "source": "operator A/B, 2026-06-26"
   }
 }
