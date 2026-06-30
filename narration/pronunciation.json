@@ -355,5 +355,12 @@
     "status": "draft",
     "note": "PROPOSED rah-mah-TAIR-ah; Order member, the Face of Ramatera (Ch 1/Ch 8); pending operator A/B confirm",
     "source": "book canon the-war-for-paratua, added 2026-06-24"
+  },
+  "Quatora": {
+    "say": "kwaTora",
+    "ipa": "",
+    "status": "confirmed",
+    "note": "kwa-TOR-a (second-syllable stress) — operator 2026-06-29",
+    "source": "operator ear 2026-06-29"
   }
 }
