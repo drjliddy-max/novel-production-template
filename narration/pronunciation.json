@@ -324,9 +324,9 @@
   "ten": {
     "say": "tenn",
     "ipa": "",
-    "status": "draft",
-    "note": "PROPOSED /tɛn/ as a word — operator caught the TTS reading 'ten' wrong ('he was ten', 'ten years old', Ch 1), 'as if in quotes' (spelled out T-E-N or wrong vowel). 'tenn' forces word-reading; pending operator A/B confirm. Whole-word \\bten\\b also catches 'ten-year-old' / 'ten years'.",
-    "source": "book canon the-war-for-paratua Ch 1, added 2026-06-24"
+    "status": "confirmed",
+    "note": "The number-word ten. tenn forces word-reading (TTS read bare ten wrong, as if spelled out). A/B confirmed 2026-06-30 (option B). Whole-word \\bten\\b also catches ten-year-old / ten years.",
+    "source": "book canon the-war-for-paratua Ch 1, added 2026-06-24; A/B confirmed operator ear 2026-06-30"
   },
   "Erulias": {
     "say": "Eh roolee us",
