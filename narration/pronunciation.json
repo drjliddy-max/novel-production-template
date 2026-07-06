@@ -369,5 +369,12 @@
     "status": "confirmed",
     "note": "DELL-us, first-syllable stress (operator 2026-07-05)",
     "source": "operator, 2026-07-05"
+  },
+  "Doomknell": {
+    "say": "Doomnell",
+    "ipa": "",
+    "status": "confirmed",
+    "note": "DOOM-nell, silent k (as in knell) (operator 2026-07-06)",
+    "source": "operator, 2026-07-06"
   }
 }
