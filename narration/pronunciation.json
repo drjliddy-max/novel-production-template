@@ -350,11 +350,11 @@
     "source": "book canon the-war-for-paratua Ch 1, added 2026-06-24"
   },
   "Ramatera": {
-    "say": "Rama tair ah",
+    "say": "Rama teera",
     "ipa": "",
-    "status": "draft",
-    "note": "PROPOSED rah-mah-TAIR-ah; Order member, the Face of Ramatera (Ch 1/Ch 8); pending operator A/B confirm",
-    "source": "book canon the-war-for-paratua, added 2026-06-24"
+    "status": "confirmed",
+    "note": "RAM-a-TEER-a, first-syllable stress (operator 2026-07-05; supersedes draft rah-mah-TAIR-ah)",
+    "source": "operator, 2026-07-05"
   },
   "Quatora": {
     "say": "kwaTora",
@@ -362,5 +362,12 @@
     "status": "confirmed",
     "note": "kwa-TOR-a (second-syllable stress) — operator 2026-06-29",
     "source": "operator ear 2026-06-29"
+  },
+  "Delus": {
+    "say": "Delluss",
+    "ipa": "",
+    "status": "confirmed",
+    "note": "DELL-us, first-syllable stress (operator 2026-07-05)",
+    "source": "operator, 2026-07-05"
   }
 }
