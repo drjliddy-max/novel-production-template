@@ -75,7 +75,7 @@ Each draft entry mirrors the master shape (`say` / `ipa` / `status` / `note` / `
 
 ## Status
 
-Seeded 2026-06-24 from the operator's locked Book I canon list (41 entries) + words ear-confirmed (`geas`, `Atar`, `bowed`, the `breath`/`breaths` noun fix). Note: the `breathe`/`breathed`/`breathing` VERB respelling was tried then removed 2026-06-26 — the engine voices the real word correctly (`breethe` wrongly gave the unvoiced *teeth* th); only the noun needs respelling. `ipa` fields pending the CMU-dict batch fill (local-AI task).
+Seeded 2026-06-24 from the operator's locked **The King Without a Throne** (Book I of *The Exanthian Cycle*) canon list (41 entries) + words ear-confirmed (`geas`, `Atar`, `bowed`, the `breath`/`breaths` noun fix). **VERB `breathe`/`breathes`/`breathed`/`breathing` (+ capitalized forms) RE-ADDED 2026-07-09 as `breethe`/`breething` (long-ee voiced-th, `seethe`-analogue), plus capitalized `Breath`/`Breaths` for sentence-initial noun parity.** The 2026-06-26 removal was an error: the operator's ear (2026-07-09) confirms the engine does NOT voice the bare verb correctly, and the `breethe` family is the operator-A/B-confirmed fix (2026-06-24, Kokoro `bm_george`, mirrored from `voice-engine/lexicons/base-en.json`; the earlier "unvoiced teeth-th" claim did not hold on that voice). Verified 2026-07-09 via `applyLexicon` (whole-word, case-sensitive) and the voice-engine lexicon test suite (7 pass). The stale audio (ch09/ch09a/ch10/ch12) must be re-rendered against this updated master to pick up the verb fix. `ipa` fields pending the CMU-dict batch fill (local-AI task).
 
 ## Audiobook file tracking (current vs stale)
 

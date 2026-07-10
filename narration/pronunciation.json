@@ -293,6 +293,76 @@
     "note": "",
     "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
   },
+  "Breath": {
+    "say": "Breth",
+    "ipa": "",
+    "status": "locked",
+    "note": "sentence-initial noun (case-sensitive matcher needs the capitalized key); parity with base-en.json",
+    "source": "canon: voice-engine/lexicons/base-en.json"
+  },
+  "Breaths": {
+    "say": "Breths",
+    "ipa": "",
+    "status": "locked",
+    "note": "sentence-initial noun; parity with base-en.json",
+    "source": "canon: voice-engine/lexicons/base-en.json"
+  },
+  "breathe": {
+    "say": "breethe",
+    "ipa": "",
+    "status": "locked",
+    "note": "VERB, long-ee voiced-th (say 'breethe', rhymes with 'seethe'). Operator A/B-confirmed 2026-06-24 on Kokoro bm_george. Re-added 2026-07-09; the 2026-06-26 removal was in error.",
+    "source": "canon: voice-engine/lexicons/base-en.json"
+  },
+  "breathes": {
+    "say": "breethes",
+    "ipa": "",
+    "status": "locked",
+    "note": "VERB; see breathe",
+    "source": "canon: voice-engine/lexicons/base-en.json"
+  },
+  "breathed": {
+    "say": "breethed",
+    "ipa": "",
+    "status": "locked",
+    "note": "VERB; see breathe",
+    "source": "canon: voice-engine/lexicons/base-en.json"
+  },
+  "breathing": {
+    "say": "breething",
+    "ipa": "",
+    "status": "locked",
+    "note": "VERB; see breathe",
+    "source": "canon: voice-engine/lexicons/base-en.json"
+  },
+  "Breathe": {
+    "say": "Breethe",
+    "ipa": "",
+    "status": "locked",
+    "note": "VERB, sentence-initial; see breathe",
+    "source": "canon: voice-engine/lexicons/base-en.json"
+  },
+  "Breathes": {
+    "say": "Breethes",
+    "ipa": "",
+    "status": "locked",
+    "note": "VERB, sentence-initial; see breathe",
+    "source": "canon: voice-engine/lexicons/base-en.json"
+  },
+  "Breathed": {
+    "say": "Breethed",
+    "ipa": "",
+    "status": "locked",
+    "note": "VERB, sentence-initial; see breathe",
+    "source": "canon: voice-engine/lexicons/base-en.json"
+  },
+  "Breathing": {
+    "say": "Breething",
+    "ipa": "",
+    "status": "locked",
+    "note": "VERB, sentence-initial; see breathe",
+    "source": "canon: voice-engine/lexicons/base-en.json"
+  },
   "geas": {
     "say": "ghesh",
     "ipa": "",
