@@ -195,6 +195,13 @@
     "note": "",
     "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
   },
+  "Tuesasche": {
+    "say": "too-SASH-ah",
+    "ipa": "tuːˈsæʃɑː",
+    "status": "needs-ear-check",
+    "note": "operator-provided 2026-07-11: tuSASHaa (too-SASH-ah). say-form is a respelling pending ear-check on the next Kokoro bm_george render. possessive 'Tuesasche's' may need its own entry if whole-word match misses it.",
+    "source": "operator 2026-07-11; canon: the-war-for-paratua Tuesasche (Jherassin leader)"
+  },
   "Dariticus": {
     "say": "Deridicus",
     "ipa": "",
