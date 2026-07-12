@@ -1,0 +1,10 @@
+{
+  "name": "novel-production-template",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Novel production template: narration prep, pronunciation lexicon, and the audiobook status tracker.",
+  "scripts": {
+    "test": "node --test narration/test/"
+  }
+}

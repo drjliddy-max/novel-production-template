@@ -60,8 +60,23 @@ const ROOT = process.argv[2] && !process.argv[2].startsWith('--') ? process.argv
 const MANU = arg('--manuscripts');
 const LEX = arg('--lexicon');
 const APPLY = process.argv.includes('--apply');
+// --tracked-only: judge ONLY what git actually carries (manifests, chunk .txt, script).
+//
+// This exists so a CI gate is possible at all. The audio (wavs, mp3s) and the render
+// receipt (audio/_voice.json) are gitignored, so on a CI runner they do not exist. A
+// full check there would see zero wavs, call all 26 units INCOMPLETE, and fail forever
+// -- a check that can never pass, which is the exact failure class this tool was fixed
+// to eliminate. So CI enforces the drift that CAN be committed (a manuscript edited
+// without re-narrating, a lexicon bumped without re-rendering, orphan chunk files, a
+// malformed manifest), and the FULL zero-state (audio present, receipts stamped) is
+// enforced locally where the audio actually lives.
+const TRACKED_ONLY = process.argv.includes('--tracked-only');
 if (!ROOT || !MANU || !LEX) {
-  console.error('usage: node audiobook-status.mjs <audiobook-root> --manuscripts <dir> --lexicon <master.json> [--apply]');
+  console.error('usage: node audiobook-status.mjs <audiobook-root> --manuscripts <dir> --lexicon <master.json> [--apply] [--tracked-only]');
+  process.exit(2);
+}
+if (TRACKED_ONLY && APPLY) {
+  console.error('refusing: --tracked-only is a read-only CI gate; it must never delete. Drop --apply.');
   process.exit(2);
 }
 
@@ -152,6 +167,12 @@ for (const dir of unitDirs) {
   else if (curSrc && recSrc !== curSrc) { status = 'STALE (manuscript changed)'; stale++; }
   else if (recLex === null) { status = 'NO-PROVENANCE (no lexicon hash)'; noProv++; }
   else if (recLex !== lexHash) { status = 'STALE (lexicon changed)'; stale++; }
+  // CI mode stops here: everything below this line inspects gitignored artifacts
+  // (the render receipt and the wavs), which do not exist on a CI runner.
+  else if (TRACKED_ONLY) {
+    if (missingTxt.length) { status = `INCOMPLETE (missing ${missingTxt.length} chunk txt)`; incomplete++; }
+    else { status = 'TRACKED-OK'; current++; }
+  }
   // Settings drift. The narration standard is one steady narrator voice, i.e. the
   // double-quote dialogue cues are stripped from the synthesis feed. A render
   // without that carries a dialogue voice-shift and is effectively stale even

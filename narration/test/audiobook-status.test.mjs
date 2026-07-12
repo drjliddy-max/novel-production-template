@@ -90,9 +90,10 @@ function build(units) {
   return { base, root, manuscripts, lexicon };
 }
 
-function run(fx, { apply = false } = {}) {
+function run(fx, { apply = false, trackedOnly = false } = {}) {
   const args = [TOOL, fx.root, '--manuscripts', fx.manuscripts, '--lexicon', fx.lexicon];
   if (apply) args.push('--apply');
+  if (trackedOnly) args.push('--tracked-only');
   try {
     const out = execFileSync(process.execPath, args, { encoding: 'utf8' });
     return { out, code: 0 };
@@ -334,5 +335,77 @@ test('--apply sweeps stale backup mp3s and transient logs', () => {
   run(fx, { apply: true });
   assert.ok(!existsSync(join(fx.root, 'ch01', 'Chapter-01-OLD.mp3')));
   assert.ok(existsSync(join(fx.root, 'ch01', 'Chapter-01.mp3')), 'deliverable mp3 is never auto-deleted');
+  rmSync(fx.base, { recursive: true, force: true });
+});
+
+// --------------------------------------------------------------------------
+// --tracked-only: the CI gate.
+//
+// Audio and render receipts are gitignored, so on a CI runner they do not exist.
+// A full check there would call every unit INCOMPLETE and fail forever -- a gate
+// that can never pass is the same bug we just removed. CI therefore judges only
+// what git actually carries, and must still catch the drift that CAN be committed.
+// --------------------------------------------------------------------------
+function stripAudio(fx, unit) {
+  rmSync(join(fx.root, unit, 'audio'), { recursive: true, force: true });
+}
+
+test('--tracked-only PASSES when audio+receipt are absent (as on a CI runner)', () => {
+  const fx = build({ ch01: {} });
+  stripAudio(fx, 'ch01');
+  const full = run(fx);
+  assert.equal(full.code, 1, 'the FULL check correctly fails with no audio');
+
+  const ci = run(fx, { trackedOnly: true });
+  assert.match(ci.out, /ch01\s+TRACKED-OK/);
+  assert.equal(ci.code, 0, 'the CI gate must be satisfiable without the audio');
+  rmSync(fx.base, { recursive: true, force: true });
+});
+
+test('--tracked-only still FAILS on a manuscript edited without re-narrating', () => {
+  const fx = build({ ch01: { source: sha('# Ch\n\nEDITED.\n') } });
+  stripAudio(fx, 'ch01');
+  const { out, code } = run(fx, { trackedOnly: true });
+  assert.match(out, /STALE \(manuscript changed\)/);
+  assert.equal(code, 1);
+  rmSync(fx.base, { recursive: true, force: true });
+});
+
+test('--tracked-only still FAILS on a lexicon bumped without re-rendering', () => {
+  const fx = build({ ch01: { lexHash: sha('{"New":"noo"}') } });
+  stripAudio(fx, 'ch01');
+  const { out, code } = run(fx, { trackedOnly: true });
+  assert.match(out, /STALE \(lexicon changed\)/);
+  assert.equal(code, 1);
+  rmSync(fx.base, { recursive: true, force: true });
+});
+
+test('--tracked-only still FAILS on committed orphan chunk .txt files', () => {
+  const fx = build({ ch01: { chunks: 2, txt: ['0001', '0002', '0003'] } });
+  stripAudio(fx, 'ch01');
+  const { out, code } = run(fx, { trackedOnly: true });
+  assert.match(out, /orphan chunk txt/);
+  assert.equal(code, 1);
+  rmSync(fx.base, { recursive: true, force: true });
+});
+
+test('--tracked-only still FAILS on a malformed manifest', () => {
+  const fx = build({ ch01: { rawManifest: '{ broken' } });
+  stripAudio(fx, 'ch01');
+  const { out, code } = run(fx, { trackedOnly: true });
+  assert.match(out, /MALFORMED/);
+  assert.equal(code, 1);
+  rmSync(fx.base, { recursive: true, force: true });
+});
+
+test('--tracked-only REFUSES --apply (a CI gate must never delete)', () => {
+  const fx = build({ ch01: { chunks: 2, txt: ['0001', '0002', '0003'] } });
+  const args = [TOOL, fx.root, '--manuscripts', fx.manuscripts, '--lexicon', fx.lexicon, '--tracked-only', '--apply'];
+  let code = 0, out = '';
+  try { execFileSync(process.execPath, args, { encoding: 'utf8' }); }
+  catch (e) { code = e.status; out = (e.stdout ?? '') + (e.stderr ?? ''); }
+  assert.equal(code, 2);
+  assert.match(out, /refusing: --tracked-only is a read-only CI gate/);
+  assert.ok(existsSync(join(fx.root, 'ch01', 'chunks', '0003.txt')), 'nothing may be deleted');
   rmSync(fx.base, { recursive: true, force: true });
 });
