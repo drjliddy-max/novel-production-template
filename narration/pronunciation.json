@@ -467,5 +467,12 @@
     "status": "needs-ear-check",
     "note": "HOMOGRAPH. The metal lead is /lEd/ (rhymes with 'bed'); the verb lead is /li:d/. They are spelled identically, so a bare 'lead' key would corrupt every verb use ('do not lead them to him'). Only the unambiguous COMPOUND is keyed. Bare metal uses must be reworded in prose ('leaden', 'the metal'); no lexicon can resolve them.",
     "source": "operator 2026-07-12 (the-war-for-paratua ch08 lead-lined room / ch10 lead-lined cases)"
+  },
+  "Gia": {
+    "say": "Jeeah",
+    "ipa": "",
+    "status": "confirmed",
+    "note": "JEE-ah (soft g, as in Gianni). Shedu; Atar's contact on the Plane of Air.",
+    "source": "operator 2026-07-13"
   }
 }
