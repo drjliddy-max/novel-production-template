@@ -105,11 +105,11 @@
     "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
   },
   "Secrulaur": {
-    "say": "Sekrulear",
+    "say": "sec-RU-lay-ar",
     "ipa": "",
-    "status": "locked",
-    "note": "",
-    "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
+    "status": "needs-ear-check",
+    "note": "sec-RU-lay-ar (stress on second syllable). Heriarch, Lord of Light; made the Monodent; died at the Challenge of Final Fall.",
+    "source": "operator 2026-07-13 (replaces earlier 'Sekrulear')"
   },
   "Istarion": {
     "say": "Istarian",
@@ -168,11 +168,11 @@
     "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
   },
   "Quasition": {
-    "say": "Quasidian",
+    "say": "KWA-zit-ee-on",
     "ipa": "",
-    "status": "locked",
-    "note": "",
-    "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
+    "status": "needs-ear-check",
+    "note": "KWA-zit-ee-on (stress on first syllable). The Great Druid, last Ward, keeper of the Wall of Wills.",
+    "source": "operator 2026-07-13 (replaces earlier 'Quasidian')"
   },
   "Orapnil": {
     "say": "Arapnel",
@@ -203,11 +203,11 @@
     "source": "operator 2026-07-11; canon: the-war-for-paratua Tuesasche (Jherassin leader)"
   },
   "Dariticus": {
-    "say": "Deridicus",
+    "say": "DAR-it-ic-us",
     "ipa": "",
-    "status": "locked",
-    "note": "",
-    "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
+    "status": "needs-ear-check",
+    "note": "DAR-it-ic-us (stress on first syllable). Order of Twelve; Tower of Dariticus; Crysalis on Tolaris.",
+    "source": "operator 2026-07-13 (replaces earlier 'Deridicus')"
   },
   "Tyerka": {
     "say": "Tierca",
