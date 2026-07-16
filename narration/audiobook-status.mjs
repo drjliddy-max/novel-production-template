@@ -9,7 +9,12 @@
 //
 //   manifest.json          (git-tracked, deterministic, written by narrate.mjs)
 //     sources.sourceSha256 - the manuscript chapter the text came from
-//     lexiconSha256        - the pronunciation lexicon that was applied
+//     lexiconSha256        - whole-file hash of the lexicon applied (legacy currency
+//                            signal; flips on metadata-only edits, so it over-stales)
+//     lexiconAudioSha256   - AUDIO-RELEVANT fingerprint: hashes only the (key -> say)
+//                            substitutions that fire against this unit's source, so a
+//                            metadata-only or unrelated-word lexicon edit is a no-op.
+//                            Preferred over lexiconSha256 when present. See lexicon-audio.mjs.
 //     chunks[].file        - the AUTHORITATIVE list of chunk files
 //
 //   audio/_voice.json      (gitignored, disk-only, written by generate.mjs)
@@ -54,6 +59,7 @@
 import { readFileSync, existsSync, readdirSync, statSync, rmSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { join, basename } from 'node:path';
+import { audioFingerprint } from './lexicon-audio.mjs';
 
 function arg(name, def) { const i = process.argv.indexOf(name); return i > -1 ? process.argv[i + 1] : def; }
 const ROOT = process.argv[2] && !process.argv[2].startsWith('--') ? process.argv[2] : null;
@@ -83,6 +89,10 @@ if (TRACKED_ONLY && APPLY) {
 const sha = (p) => (existsSync(p) ? createHash('sha256').update(readFileSync(p)).digest('hex') : null);
 const human = (n) => (n > 1e6 ? (n / 1e6).toFixed(0) + 'M' : (n / 1e3).toFixed(0) + 'K');
 const lexHash = sha(LEX);
+// Parsed master lexicon, for the AUDIO-RELEVANT currency check (lexiconAudioSha256).
+// Falls back to null if unparseable; the whole-file lexHash path still works then.
+let lexObj = null;
+try { lexObj = JSON.parse(readFileSync(LEX, 'utf8')); } catch { lexObj = null; }
 
 const obsolete = [];   // { path, reason }
 let freed = 0;
@@ -161,12 +171,32 @@ for (const dir of unitDirs) {
   const curSrc = srcFile ? sha(srcFile) : null;
   const recSrc = man?.sources?.sourceSha256 || man?.sourceSha256 || null;
   const recLex = man?.lexiconSha256 ?? null;
+  const recAudioLex = man?.lexiconAudioSha256 ?? null;
+
+  // --- Lexicon currency: prefer the AUDIO-RELEVANT fingerprint over the whole file. ---
+  // The whole-file lexiconSha256 flips on ANY lexicon edit, including metadata-only ones
+  // (status/note/verification) and one-word `say` fixes, which re-staled the entire book.
+  // lexiconAudioSha256 hashes only the (key -> say) substitutions that fire against THIS
+  // unit's source, so metadata edits are no-ops and a `say` change stales only the units
+  // that contain that word. Legacy manifests (no lexiconAudioSha256) fall back to the
+  // whole-file compare so nothing breaks before they are re-stamped. See lexicon-audio.mjs.
+  let lexState = 'ok'; // 'ok' | 'stale' | 'noprov'
+  let lexNote = '';
+  if (recAudioLex !== null && lexObj) {
+    const srcText = srcFile && existsSync(srcFile) ? readFileSync(srcFile, 'utf8') : null;
+    if (srcText === null) { lexState = 'noprov'; lexNote = 'source unreadable for audio fingerprint'; }
+    else if (recAudioLex !== audioFingerprint(srcText, lexObj)) { lexState = 'stale'; }
+  } else if (recLex === null) {
+    lexState = 'noprov'; lexNote = 'no lexicon hash';
+  } else if (recLex !== lexHash) {
+    lexState = 'stale';
+  }
 
   let status;
   if (!recSrc) { status = 'NO-PROVENANCE (no source hash)'; noProv++; }
   else if (curSrc && recSrc !== curSrc) { status = 'STALE (manuscript changed)'; stale++; }
-  else if (recLex === null) { status = 'NO-PROVENANCE (no lexicon hash)'; noProv++; }
-  else if (recLex !== lexHash) { status = 'STALE (lexicon changed)'; stale++; }
+  else if (lexState === 'noprov') { status = `NO-PROVENANCE (${lexNote})`; noProv++; }
+  else if (lexState === 'stale') { status = 'STALE (lexicon changed)'; stale++; }
   // CI mode stops here: everything below this line inspects gitignored artifacts
   // (the render receipt and the wavs), which do not exist on a CI runner.
   else if (TRACKED_ONLY) {

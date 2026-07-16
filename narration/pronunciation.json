@@ -2,484 +2,619 @@
   "bowed": {
     "say": "bowwed",
     "ipa": "",
-    "status": "confirmed",
-    "note": "/baUd/ rhymes with loud (bend-at-waist sense), NOT /boUd/ like code",
+    "status": "unverified",
+    "note": "/baUd/ rhymes with loud (bend-at-waist sense), NOT /boUd/ like code [schema migration 2026-07-14: prior status \"confirmed\" carried no listening evidence and was demoted to unverified. Not known wrong — simply never heard on the target voice.]",
     "source": "operator A/B, 2026-06-24"
   },
   "Aerendyl": {
     "say": "Airrendil",
     "ipa": "",
-    "status": "locked",
-    "note": "ER-un-dyl (first-syllable stress)",
+    "status": "unverified",
+    "note": "ER-un-dyl (first-syllable stress) [schema migration 2026-07-14: prior status \"locked\" carried no listening evidence and was demoted to unverified. Not known wrong — simply never heard on the target voice.]",
     "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
   },
   "Azarak": {
     "say": "Azarack",
     "ipa": "",
-    "status": "locked",
-    "note": "",
+    "status": "unverified",
+    "note": "[schema migration 2026-07-14: prior status \"locked\" carried no listening evidence and was demoted to unverified. Not known wrong — simply never heard on the target voice.]",
     "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
   },
   "Jerial": {
     "say": "Jerrial",
     "ipa": "",
-    "status": "locked",
-    "note": "",
+    "status": "unverified",
+    "note": "[schema migration 2026-07-14: prior status \"locked\" carried no listening evidence and was demoted to unverified. Not known wrong — simply never heard on the target voice.]",
     "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
   },
   "Kail": {
     "say": "Kael",
     "ipa": "",
-    "status": "locked",
-    "note": "",
+    "status": "unverified",
+    "note": "[schema migration 2026-07-14: prior status \"locked\" carried no listening evidence and was demoted to unverified. Not known wrong — simply never heard on the target voice.]",
     "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
   },
   "Loric": {
     "say": "Lorik",
     "ipa": "",
-    "status": "locked",
-    "note": "",
+    "status": "unverified",
+    "note": "[schema migration 2026-07-14: prior status \"locked\" carried no listening evidence and was demoted to unverified. Not known wrong — simply never heard on the target voice.]",
     "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
   },
   "Cirshe": {
     "say": "Kirsha",
     "ipa": "",
-    "status": "locked",
-    "note": "",
+    "status": "unverified",
+    "note": "[schema migration 2026-07-14: prior status \"locked\" carried no listening evidence and was demoted to unverified. Not known wrong — simply never heard on the target voice.]",
     "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
   },
   "Cirshen": {
     "say": "Kirshen",
     "ipa": "",
-    "status": "locked",
-    "note": "",
+    "status": "unverified",
+    "note": "[schema migration 2026-07-14: prior status \"locked\" carried no listening evidence and was demoted to unverified. Not known wrong — simply never heard on the target voice.]",
     "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
   },
   "Breetwo": {
     "say": "Bree two",
     "ipa": "",
-    "status": "locked",
-    "note": "BREE-too",
+    "status": "unverified",
+    "note": "BREE-too [schema migration 2026-07-14: prior status \"locked\" carried no listening evidence and was demoted to unverified. Not known wrong — simply never heard on the target voice.]",
     "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
   },
   "Thordin": {
     "say": "Thorden",
     "ipa": "",
-    "status": "locked",
-    "note": "",
+    "status": "unverified",
+    "note": "[schema migration 2026-07-14: prior status \"locked\" carried no listening evidence and was demoted to unverified. Not known wrong — simply never heard on the target voice.]",
     "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
   },
   "Ravina": {
     "say": "Ra Veena",
     "ipa": "",
-    "status": "locked",
-    "note": "rah-VEE-na",
+    "status": "unverified",
+    "note": "rah-VEE-na [schema migration 2026-07-14: prior status \"locked\" carried no listening evidence and was demoted to unverified. Not known wrong — simply never heard on the target voice.]",
     "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
   },
   "Moryn": {
     "say": "Morin",
     "ipa": "",
-    "status": "locked",
-    "note": "",
+    "status": "unverified",
+    "note": "[schema migration 2026-07-14: prior status \"locked\" carried no listening evidence and was demoted to unverified. Not known wrong — simply never heard on the target voice.]",
     "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
   },
   "Luthan": {
     "say": "Luthun",
     "ipa": "",
-    "status": "confirmed",
+    "status": "ear-confirmed",
     "note": "SOFT / voiceless th (the sound in 'thin', 'breath') — NOT the hard/voiced th of 'the'. Operator ear-confirmed 2026-07-14: the current value renders correctly.",
-    "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json; EAR-CONFIRMED by operator on Kokoro bm_george, 2026-07-14 (soft th is correct)"
+    "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json; EAR-CONFIRMED by operator on Kokoro bm_george, 2026-07-14 (soft th is correct)",
+    "verification": {
+      "method": "listening",
+      "voice": "kokoro/bm_george",
+      "date": "2026-07-14"
+    }
   },
   "Luthans": {
     "say": "Luthuns",
     "ipa": "",
-    "status": "confirmed",
+    "status": "ear-confirmed",
     "note": "SOFT / voiceless th (the sound in 'thin', 'breath') — NOT the hard/voiced th of 'the'. Operator ear-confirmed 2026-07-14: the current value renders correctly.",
-    "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json; EAR-CONFIRMED by operator on Kokoro bm_george, 2026-07-14 (soft th is correct)"
+    "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json; EAR-CONFIRMED by operator on Kokoro bm_george, 2026-07-14 (soft th is correct)",
+    "verification": {
+      "method": "listening",
+      "voice": "kokoro/bm_george",
+      "date": "2026-07-14"
+    }
   },
   "Whiticar": {
     "say": "Whitaker",
     "ipa": "",
-    "status": "locked",
-    "note": "",
+    "status": "unverified",
+    "note": "[schema migration 2026-07-14: prior status \"locked\" carried no listening evidence and was demoted to unverified. Not known wrong — simply never heard on the target voice.]",
     "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
   },
   "Secrulaur": {
     "say": "Sekrulayar",
     "ipa": "",
-    "status": "confirmed",
+    "status": "ear-confirmed",
     "note": "sek-ru-LAY-ar. Heriarch, Lord of Light; made the Monodent; died at the Challenge of Final Fall. The 'sek' spelling is load-bearing: a leading 'sec' invites a soft-c reading.",
-    "source": "operator A/B on Kokoro bm_george, 2026-07-14 (supersedes 'sec-RU-lay-ar' 2026-07-13, which was stress notation wrongly placed in say and was spoken literally; and the earlier 'Sekrulear')"
+    "source": "operator A/B on Kokoro bm_george, 2026-07-14 (supersedes 'sec-RU-lay-ar' 2026-07-13, which was stress notation wrongly placed in say and was spoken literally; and the earlier 'Sekrulear')",
+    "verification": {
+      "method": "listening",
+      "voice": "kokoro/bm_george",
+      "date": "2026-07-14"
+    }
   },
   "Istarion": {
     "say": "Istarian",
     "ipa": "",
-    "status": "locked",
-    "note": "",
+    "status": "unverified",
+    "note": "[schema migration 2026-07-14: prior status \"locked\" carried no listening evidence and was demoted to unverified. Not known wrong — simply never heard on the target voice.]",
     "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
   },
   "Efreeti": {
     "say": "Ifrit",
     "ipa": "",
-    "status": "locked",
-    "note": "",
+    "status": "unverified",
+    "note": "[schema migration 2026-07-14: prior status \"locked\" carried no listening evidence and was demoted to unverified. Not known wrong — simply never heard on the target voice.]",
     "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
   },
   "Iomedae": {
     "say": "Iomadday",
     "ipa": "",
-    "status": "locked",
-    "note": "ee-oh-MAD-day",
+    "status": "unverified",
+    "note": "ee-oh-MAD-day [schema migration 2026-07-14: prior status \"locked\" carried no listening evidence and was demoted to unverified. Not known wrong — simply never heard on the target voice.]",
     "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
   },
   "Scourtin": {
     "say": "Skortan",
     "ipa": "",
-    "status": "locked",
-    "note": "",
+    "status": "unverified",
+    "note": "[schema migration 2026-07-14: prior status \"locked\" carried no listening evidence and was demoted to unverified. Not known wrong — simply never heard on the target voice.]",
     "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
   },
   "Gregore": {
     "say": "Gregor",
     "ipa": "",
-    "status": "locked",
-    "note": "",
+    "status": "unverified",
+    "note": "[schema migration 2026-07-14: prior status \"locked\" carried no listening evidence and was demoted to unverified. Not known wrong — simply never heard on the target voice.]",
     "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
   },
   "Meruum": {
     "say": "Merum",
     "ipa": "",
-    "status": "locked",
-    "note": "",
+    "status": "unverified",
+    "note": "[schema migration 2026-07-14: prior status \"locked\" carried no listening evidence and was demoted to unverified. Not known wrong — simply never heard on the target voice.]",
     "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
   },
   "Cassitor": {
     "say": "Cassator",
     "ipa": "",
-    "status": "locked",
-    "note": "",
+    "status": "unverified",
+    "note": "[schema migration 2026-07-14: prior status \"locked\" carried no listening evidence and was demoted to unverified. Not known wrong — simply never heard on the target voice.]",
     "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
   },
   "Calet": {
     "say": "Calais",
     "ipa": "",
-    "status": "locked",
-    "note": "",
+    "status": "unverified",
+    "note": "[schema migration 2026-07-14: prior status \"locked\" carried no listening evidence and was demoted to unverified. Not known wrong — simply never heard on the target voice.]",
     "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
   },
   "Quasition": {
     "say": "Kwuh ziddian",
     "ipa": "",
-    "status": "confirmed",
+    "status": "ear-confirmed",
     "note": "kwuh-ZID-ee-an: SHORT i, stress on the second syllable. The Great Druid, last Ward, keeper of the Wall of Wills. Spaced form (cf. 'Ra Veena', 'Bree two') because Kokoro reads any 'quasi-' spelling as the English word quasi (KWAY-zye) and gives a long I; the doubled d closes the syllable and holds the i short. The earlier 'KWA-zit-ee-on' first-syllable target is SUPERSEDED by the operator's ear.",
-    "source": "operator A/B on Kokoro bm_george, 2026-07-14 (supersedes 'KWA-zit-ee-on' 2026-07-13, which was stress notation wrongly placed in say and was spoken literally; and 'Quasidian', which had the right shape but a long I)"
+    "source": "operator A/B on Kokoro bm_george, 2026-07-14 (supersedes 'KWA-zit-ee-on' 2026-07-13, which was stress notation wrongly placed in say and was spoken literally; and 'Quasidian', which had the right shape but a long I)",
+    "verification": {
+      "method": "listening",
+      "voice": "kokoro/bm_george",
+      "date": "2026-07-14"
+    }
   },
   "Orapnil": {
     "say": "Arapnel",
     "ipa": "",
-    "status": "locked",
-    "note": "",
+    "status": "unverified",
+    "note": "[schema migration 2026-07-14: prior status \"locked\" carried no listening evidence and was demoted to unverified. Not known wrong — simply never heard on the target voice.]",
     "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
   },
   "Nillia": {
     "say": "Nilia",
     "ipa": "",
-    "status": "locked",
-    "note": "",
+    "status": "unverified",
+    "note": "[schema migration 2026-07-14: prior status \"locked\" carried no listening evidence and was demoted to unverified. Not known wrong — simply never heard on the target voice.]",
     "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
   },
   "Jherassin": {
     "say": "Jairassin",
     "ipa": "",
-    "status": "locked",
-    "note": "",
+    "status": "unverified",
+    "note": "[schema migration 2026-07-14: prior status \"locked\" carried no listening evidence and was demoted to unverified. Not known wrong — simply never heard on the target voice.]",
     "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
   },
   "Tuesasche": {
     "say": "Too sashai",
     "ipa": "",
-    "status": "confirmed",
+    "status": "ear-confirmed",
     "note": "too-sash-AI: the ending is an AYE sound, NOT the 'ah' the 2026-07-11 entry assumed. Jherassin leader; holds the neutral peace of the Cirshe under-city warrens. The old ipa (tuːˈsæʃɑː, ending ɑː) contradicted the operator's ear and was cleared rather than guessed at; re-derive from the confirmed render if an ipa is wanted. Possessive needs no separate entry: the whole-word matcher yields \"Too sashai's\" (verified 2026-07-14 against src/lexicon.mjs, 18 possessives in Book I).",
-    "source": "operator A/B on Kokoro bm_george, 2026-07-14 (supersedes 'too-SASH-ah' 2026-07-11, which was stress notation wrongly placed in say and was spoken literally; this name had no correct prior rendering)"
+    "source": "operator A/B on Kokoro bm_george, 2026-07-14 (supersedes 'too-SASH-ah' 2026-07-11, which was stress notation wrongly placed in say and was spoken literally; this name had no correct prior rendering)",
+    "verification": {
+      "method": "listening",
+      "voice": "kokoro/bm_george",
+      "date": "2026-07-14"
+    }
   },
   "Dariticus": {
     "say": "Deridicus",
     "ipa": "",
-    "status": "confirmed",
+    "status": "ear-confirmed",
     "note": "deh-RID-i-cus, stress on the second syllable. Order of Twelve; Tower of Dariticus; Crysalis on Tolaris. The earlier 'DAR-it-ic-us' first-syllable target is SUPERSEDED by the operator's ear.",
-    "source": "operator A/B on Kokoro bm_george, 2026-07-14 — RESTORES the pre-2026-07-13 'Deridicus'. The 2026-07-13 'DAR-it-ic-us' was stress notation wrongly placed in say and was spoken literally."
+    "source": "operator A/B on Kokoro bm_george, 2026-07-14 — RESTORES the pre-2026-07-13 'Deridicus'. The 2026-07-13 'DAR-it-ic-us' was stress notation wrongly placed in say and was spoken literally.",
+    "verification": {
+      "method": "listening",
+      "voice": "kokoro/bm_george",
+      "date": "2026-07-14"
+    }
   },
   "Tyerka": {
     "say": "Tierca",
     "ipa": "",
-    "status": "locked",
-    "note": "",
+    "status": "unverified",
+    "note": "[schema migration 2026-07-14: prior status \"locked\" carried no listening evidence and was demoted to unverified. Not known wrong — simply never heard on the target voice.]",
     "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
   },
   "Tolaris": {
     "say": "Talaris",
     "ipa": "",
-    "status": "locked",
-    "note": "",
+    "status": "unverified",
+    "note": "[schema migration 2026-07-14: prior status \"locked\" carried no listening evidence and was demoted to unverified. Not known wrong — simply never heard on the target voice.]",
     "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
   },
   "Tindalos": {
     "say": "Tyndalus",
     "ipa": "",
-    "status": "locked",
-    "note": "",
+    "status": "unverified",
+    "note": "[schema migration 2026-07-14: prior status \"locked\" carried no listening evidence and was demoted to unverified. Not known wrong — simply never heard on the target voice.]",
     "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
   },
   "Psibow": {
     "say": "Saibo",
     "ipa": "",
-    "status": "locked",
-    "note": "",
+    "status": "unverified",
+    "note": "[schema migration 2026-07-14: prior status \"locked\" carried no listening evidence and was demoted to unverified. Not known wrong — simply never heard on the target voice.]",
     "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
   },
   "Jehranna": {
     "say": "Gerona",
     "ipa": "",
-    "status": "locked",
-    "note": "",
+    "status": "unverified",
+    "note": "[schema migration 2026-07-14: prior status \"locked\" carried no listening evidence and was demoted to unverified. Not known wrong — simply never heard on the target voice.]",
     "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
   },
   "Hfera": {
     "say": "Hephra",
     "ipa": "",
-    "status": "locked",
-    "note": "",
+    "status": "unverified",
+    "note": "[schema migration 2026-07-14: prior status \"locked\" carried no listening evidence and was demoted to unverified. Not known wrong — simply never heard on the target voice.]",
     "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
   },
   "Girallon": {
     "say": "Girolon",
     "ipa": "",
-    "status": "locked",
-    "note": "",
+    "status": "unverified",
+    "note": "[schema migration 2026-07-14: prior status \"locked\" carried no listening evidence and was demoted to unverified. Not known wrong — simply never heard on the target voice.]",
     "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
   },
   "Aspirius": {
     "say": "Asperius",
     "ipa": "",
-    "status": "locked",
-    "note": "",
+    "status": "unverified",
+    "note": "[schema migration 2026-07-14: prior status \"locked\" carried no listening evidence and was demoted to unverified. Not known wrong — simply never heard on the target voice.]",
     "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
   },
   "Arcrysts": {
     "say": "Arcrists",
     "ipa": "",
-    "status": "locked",
-    "note": "",
+    "status": "unverified",
+    "note": "[schema migration 2026-07-14: prior status \"locked\" carried no listening evidence and was demoted to unverified. Not known wrong — simply never heard on the target voice.]",
     "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
   },
   "Arante": {
     "say": "Orante",
     "ipa": "",
-    "status": "locked",
-    "note": "",
+    "status": "unverified",
+    "note": "[schema migration 2026-07-14: prior status \"locked\" carried no listening evidence and was demoted to unverified. Not known wrong — simply never heard on the target voice.]",
     "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
   },
   "Allaster": {
     "say": "Alistair",
     "ipa": "",
-    "status": "locked",
-    "note": "",
+    "status": "unverified",
+    "note": "[schema migration 2026-07-14: prior status \"locked\" carried no listening evidence and was demoted to unverified. Not known wrong — simply never heard on the target voice.]",
     "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json"
   },
   "breath": {
     "say": "breth",
     "ipa": "",
-    "status": "confirmed",
+    "status": "ear-confirmed",
     "note": "NOUN /brEth/, rhymes with death. Operator ear-confirmed 2026-07-14.",
-    "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json; EAR-CONFIRMED by operator on Kokoro bm_george, 2026-07-14 (noun)"
+    "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json; EAR-CONFIRMED by operator on Kokoro bm_george, 2026-07-14 (noun)",
+    "verification": {
+      "method": "listening",
+      "voice": "kokoro/bm_george",
+      "date": "2026-07-14"
+    }
   },
   "breaths": {
     "say": "breths",
     "ipa": "",
-    "status": "confirmed",
+    "status": "ear-confirmed",
     "note": "NOUN /brEth/, rhymes with death. Operator ear-confirmed 2026-07-14.",
-    "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json; EAR-CONFIRMED by operator on Kokoro bm_george, 2026-07-14 (noun)"
+    "source": "canon: the-war-for-paratua/audiobook/book1/lexicon.json; EAR-CONFIRMED by operator on Kokoro bm_george, 2026-07-14 (noun)",
+    "verification": {
+      "method": "listening",
+      "voice": "kokoro/bm_george",
+      "date": "2026-07-14"
+    }
   },
   "Breath": {
     "say": "Breth",
     "ipa": "",
-    "status": "confirmed",
+    "status": "ear-confirmed",
     "note": "sentence-initial noun (case-sensitive matcher needs the capitalized key); parity with base-en.json NOUN /brEth/, rhymes with death. Operator ear-confirmed 2026-07-14.",
-    "source": "canon: voice-engine/lexicons/base-en.json; EAR-CONFIRMED by operator on Kokoro bm_george, 2026-07-14 (noun)"
+    "source": "canon: voice-engine/lexicons/base-en.json; EAR-CONFIRMED by operator on Kokoro bm_george, 2026-07-14 (noun)",
+    "verification": {
+      "method": "listening",
+      "voice": "kokoro/bm_george",
+      "date": "2026-07-14"
+    }
   },
   "Breaths": {
     "say": "Breths",
     "ipa": "",
-    "status": "confirmed",
+    "status": "ear-confirmed",
     "note": "sentence-initial noun; parity with base-en.json NOUN /brEth/, rhymes with death. Operator ear-confirmed 2026-07-14.",
-    "source": "canon: voice-engine/lexicons/base-en.json; EAR-CONFIRMED by operator on Kokoro bm_george, 2026-07-14 (noun)"
+    "source": "canon: voice-engine/lexicons/base-en.json; EAR-CONFIRMED by operator on Kokoro bm_george, 2026-07-14 (noun)",
+    "verification": {
+      "method": "listening",
+      "voice": "kokoro/bm_george",
+      "date": "2026-07-14"
+    }
   },
   "breathe": {
     "say": "breethe",
     "ipa": "",
-    "status": "confirmed",
+    "status": "ear-confirmed",
     "note": "VERB, long-ee voiced-th (say 'breethe', rhymes with 'seethe'). Operator A/B-confirmed 2026-06-24 on Kokoro bm_george. Re-added 2026-07-09; the 2026-06-26 removal was in error.",
-    "source": "canon: voice-engine/lexicons/base-en.json; EAR-CONFIRMED by operator on Kokoro bm_george, 2026-07-14 (infinitive / participle)"
+    "source": "canon: voice-engine/lexicons/base-en.json; EAR-CONFIRMED by operator on Kokoro bm_george, 2026-07-14 (infinitive / participle)",
+    "verification": {
+      "method": "listening",
+      "voice": "kokoro/bm_george",
+      "date": "2026-07-14"
+    }
   },
   "breathes": {
     "say": "breethes",
     "ipa": "",
-    "status": "locked",
-    "note": "VERB; see breathe",
+    "status": "unverified",
+    "note": "VERB; see breathe [schema migration 2026-07-14: prior status \"locked\" carried no listening evidence and was demoted to unverified. Not known wrong — simply never heard on the target voice.]",
     "source": "canon: voice-engine/lexicons/base-en.json"
   },
   "breathed": {
     "say": "breethe'd",
     "ipa": "",
-    "status": "confirmed",
+    "status": "ear-confirmed",
     "note": "VERB PAST TENSE. HARD/VOICED th (the sound in 'the', 'breathe', 'seethe') — NOT the soft/voiceless th of 'breath'. The apostrophe preserves the magic-e that voices the th: plain 'breethed' loses it and the engine renders a SOFT th, which the operator rejected 2026-07-14. Do not 'clean up' the apostrophe.",
-    "source": "operator A/B on Kokoro bm_george, 2026-07-14 (supersedes 'breethed', which carried an unearned status:locked inherited from the old book1 lexicon and rendered a voiceless th). 24 uses in Book I."
+    "source": "operator A/B on Kokoro bm_george, 2026-07-14 (supersedes 'breethed', which carried an unearned status:locked inherited from the old book1 lexicon and rendered a voiceless th). 24 uses in Book I.",
+    "verification": {
+      "method": "listening",
+      "voice": "kokoro/bm_george",
+      "date": "2026-07-14"
+    }
   },
   "breathing": {
     "say": "breething",
     "ipa": "",
-    "status": "confirmed",
+    "status": "ear-confirmed",
     "note": "VERB; see breathe",
-    "source": "canon: voice-engine/lexicons/base-en.json; EAR-CONFIRMED by operator on Kokoro bm_george, 2026-07-14 (infinitive / participle)"
+    "source": "canon: voice-engine/lexicons/base-en.json; EAR-CONFIRMED by operator on Kokoro bm_george, 2026-07-14 (infinitive / participle)",
+    "verification": {
+      "method": "listening",
+      "voice": "kokoro/bm_george",
+      "date": "2026-07-14"
+    }
   },
   "Breathe": {
     "say": "Breethe",
     "ipa": "",
-    "status": "confirmed",
+    "status": "ear-confirmed",
     "note": "VERB, sentence-initial; see breathe",
-    "source": "canon: voice-engine/lexicons/base-en.json; EAR-CONFIRMED by operator on Kokoro bm_george, 2026-07-14 (infinitive / participle)"
+    "source": "canon: voice-engine/lexicons/base-en.json; EAR-CONFIRMED by operator on Kokoro bm_george, 2026-07-14 (infinitive / participle)",
+    "verification": {
+      "method": "listening",
+      "voice": "kokoro/bm_george",
+      "date": "2026-07-14"
+    }
   },
   "Breathes": {
     "say": "Breethes",
     "ipa": "",
-    "status": "locked",
-    "note": "VERB, sentence-initial; see breathe",
+    "status": "unverified",
+    "note": "VERB, sentence-initial; see breathe [schema migration 2026-07-14: prior status \"locked\" carried no listening evidence and was demoted to unverified. Not known wrong — simply never heard on the target voice.]",
     "source": "canon: voice-engine/lexicons/base-en.json"
   },
   "Breathed": {
     "say": "Breethe'd",
     "ipa": "",
-    "status": "confirmed",
+    "status": "ear-confirmed",
     "note": "VERB PAST TENSE. HARD/VOICED th (the sound in 'the', 'breathe', 'seethe') — NOT the soft/voiceless th of 'breath'. The apostrophe preserves the magic-e that voices the th: plain 'breethed' loses it and the engine renders a SOFT th, which the operator rejected 2026-07-14. Do not 'clean up' the apostrophe. Sentence-initial form.",
-    "source": "operator A/B on Kokoro bm_george, 2026-07-14 (supersedes 'breethed', which carried an unearned status:locked inherited from the old book1 lexicon and rendered a voiceless th). 24 uses in Book I."
+    "source": "operator A/B on Kokoro bm_george, 2026-07-14 (supersedes 'breethed', which carried an unearned status:locked inherited from the old book1 lexicon and rendered a voiceless th). 24 uses in Book I.",
+    "verification": {
+      "method": "listening",
+      "voice": "kokoro/bm_george",
+      "date": "2026-07-14"
+    }
   },
   "Breathing": {
     "say": "Breething",
     "ipa": "",
-    "status": "confirmed",
+    "status": "ear-confirmed",
     "note": "VERB, sentence-initial; see breathe",
-    "source": "canon: voice-engine/lexicons/base-en.json; EAR-CONFIRMED by operator on Kokoro bm_george, 2026-07-14 (infinitive / participle)"
+    "source": "canon: voice-engine/lexicons/base-en.json; EAR-CONFIRMED by operator on Kokoro bm_george, 2026-07-14 (infinitive / participle)",
+    "verification": {
+      "method": "listening",
+      "voice": "kokoro/bm_george",
+      "date": "2026-07-14"
+    }
   },
   "geas": {
     "say": "ghesh",
     "ipa": "",
-    "status": "confirmed",
-    "note": "hard-G 'GESH' (like go/ghost)",
-    "source": "operator A/B, 2026-06-24"
+    "status": "ear-confirmed",
+    "note": "hard-G 'GESH' (like go/ghost) [schema migration 2026-07-14: prior status \"confirmed\" carried no listening evidence and was demoted to unverified. Not known wrong — simply never heard on the target voice.]",
+    "source": "operator A/B, 2026-06-24",
+    "verification": {
+      "method": "listening",
+      "voice": "kokoro/bm_george",
+      "date": "2026-07-15"
+    }
   },
   "Geas": {
     "say": "Ghesh",
     "ipa": "",
-    "status": "confirmed",
-    "note": "hard-G 'GESH' (like go/ghost)",
-    "source": "operator A/B, 2026-06-24"
+    "status": "ear-confirmed",
+    "note": "hard-G 'GESH' (like go/ghost) [schema migration 2026-07-14: prior status \"confirmed\" carried no listening evidence and was demoted to unverified. Not known wrong — simply never heard on the target voice.]",
+    "source": "operator A/B, 2026-06-24",
+    "verification": {
+      "method": "listening",
+      "voice": "kokoro/bm_george",
+      "date": "2026-07-15"
+    }
   },
   "Atar": {
     "say": "Ate-tar",
     "ipa": "",
-    "status": "confirmed",
+    "status": "ear-confirmed",
     "note": "The word ATE + TAR, said as ONE word. The hyphen is a WORD-JOINER, not stress notation: Kokoro reads 'Ate-tar' as a single token, which is what wins here. Spaced 'Ate tar' has the right vowel but the engine pauses inside the name (6.35s vs 5.93s in identical text, measured 2026-07-14); plain 'Atetar' closes the gap but loses the vowel. The hyphen gets both. WARNING: the old 'Aytar' rendered as 'Itar' — the 'ay' digraph collapses to a long-I on this voice. Do not reintroduce it.",
-    "source": "operator A/B on Kokoro bm_george, 2026-07-14 (supersedes 'Aytar', which carried status:confirmed from 2026-06-24 but was NEVER ear-checked and mispronounced the name as 'Itar' in every render since June; 227 uses across 14 chapters of Book I)"
+    "source": "operator A/B on Kokoro bm_george, 2026-07-14 (supersedes 'Aytar', which carried status:confirmed from 2026-06-24 but was NEVER ear-checked and mispronounced the name as 'Itar' in every render since June; 227 uses across 14 chapters of Book I)",
+    "verification": {
+      "method": "listening",
+      "voice": "kokoro/bm_george",
+      "date": "2026-07-14"
+    }
   },
   "eat": {
     "say": "eet",
     "ipa": "",
-    "status": "confirmed",
-    "note": "long-E /iːt/, NOT 'ate' — operator caught the TTS saying 'ate' (queen's dinner line, Ch 1)",
-    "source": "operator A/B, 2026-06-24"
+    "status": "ear-confirmed",
+    "note": "long-E /iːt/, NOT 'ate' — operator caught the TTS saying 'ate' (queen's dinner line, Ch 1) [schema migration 2026-07-14: prior status \"confirmed\" carried no listening evidence and was demoted to unverified. Not known wrong — simply never heard on the target voice.]",
+    "source": "operator A/B, 2026-06-24",
+    "verification": {
+      "method": "listening",
+      "voice": "kokoro/bm_george",
+      "date": "2026-07-15"
+    }
   },
   "ten": {
     "say": "tenn",
     "ipa": "",
-    "status": "confirmed",
-    "note": "The number-word ten. tenn forces word-reading (TTS read bare ten wrong, as if spelled out). A/B confirmed 2026-06-30 (option B). Whole-word \\bten\\b also catches ten-year-old / ten years.",
-    "source": "book canon the-war-for-paratua Ch 1, added 2026-06-24; A/B confirmed operator ear 2026-06-30"
+    "status": "ear-confirmed",
+    "note": "The number-word ten. tenn forces word-reading (TTS read bare ten wrong, as if spelled out). A/B confirmed 2026-06-30 (option B). Whole-word \\bten\\b also catches ten-year-old / ten years. [schema migration 2026-07-14: prior status \"confirmed\" carried no listening evidence and was demoted to unverified. Not known wrong — simply never heard on the target voice.]",
+    "source": "book canon the-war-for-paratua Ch 1, added 2026-06-24; A/B confirmed operator ear 2026-06-30",
+    "verification": {
+      "method": "listening",
+      "voice": "kokoro/bm_george",
+      "date": "2026-07-15"
+    }
   },
   "Erulias": {
     "say": "Eh roolee us",
     "ipa": "",
-    "status": "draft",
-    "note": "PROPOSED eh-ROO-lee-us; King Erulias Tregarth (Ch 1 Order history); pending operator A/B confirm",
+    "status": "unverified",
+    "note": "PROPOSED eh-ROO-lee-us; King Erulias Tregarth (Ch 1 Order history); pending operator A/B confirm [schema migration 2026-07-14: prior status \"draft\" carried no listening evidence and was demoted to unverified. Not known wrong — simply never heard on the target voice.]",
     "source": "book canon the-war-for-paratua Ch 1, added 2026-06-24"
   },
   "Jublican": {
     "say": "Jooblican",
     "ipa": "",
-    "status": "draft",
-    "note": "PROPOSED JOO-bli-kun; King Jublican Tregarth (Ch 1 Order history); pending operator A/B confirm",
+    "status": "unverified",
+    "note": "PROPOSED JOO-bli-kun; King Jublican Tregarth (Ch 1 Order history); pending operator A/B confirm [schema migration 2026-07-14: prior status \"draft\" carried no listening evidence and was demoted to unverified. Not known wrong — simply never heard on the target voice.]",
     "source": "book canon the-war-for-paratua Ch 1, added 2026-06-24"
   },
   "Toras": {
     "say": "Torahs",
     "ipa": "",
-    "status": "draft",
-    "note": "PROPOSED TOR-ahss; the Order's police-armies (Ch 1 Order history); pending operator A/B confirm",
+    "status": "unverified",
+    "note": "PROPOSED TOR-ahss; the Order's police-armies (Ch 1 Order history); pending operator A/B confirm [schema migration 2026-07-14: prior status \"draft\" carried no listening evidence and was demoted to unverified. Not known wrong — simply never heard on the target voice.]",
     "source": "book canon the-war-for-paratua Ch 1, added 2026-06-24"
   },
   "Ramatera": {
     "say": "Rama teera",
     "ipa": "",
-    "status": "confirmed",
-    "note": "RAM-a-TEER-a, first-syllable stress (operator 2026-07-05; supersedes draft rah-mah-TAIR-ah)",
-    "source": "operator, 2026-07-05"
+    "status": "ear-confirmed",
+    "note": "RAM-a-TEER-a, first-syllable stress (operator 2026-07-05; supersedes draft rah-mah-TAIR-ah) [schema migration 2026-07-14: prior status \"confirmed\" carried no listening evidence and was demoted to unverified. Not known wrong — simply never heard on the target voice.]",
+    "source": "operator, 2026-07-05",
+    "verification": {
+      "method": "listening",
+      "voice": "kokoro/bm_george",
+      "date": "2026-07-15"
+    }
   },
   "Quatora": {
     "say": "kwaTora",
     "ipa": "",
-    "status": "confirmed",
-    "note": "kwa-TOR-a (second-syllable stress) — operator 2026-06-29",
-    "source": "operator ear 2026-06-29"
+    "status": "ear-confirmed",
+    "note": "kwa-TOR-a (second-syllable stress) — operator 2026-06-29 Operator ear-check 2026-07-15: \"close enough\", promoted.",
+    "source": "operator ear 2026-06-29",
+    "verification": {
+      "method": "listening",
+      "voice": "kokoro/bm_george",
+      "date": "2026-07-15"
+    }
   },
   "Delus": {
     "say": "Delluss",
     "ipa": "",
-    "status": "confirmed",
-    "note": "DELL-us, first-syllable stress (operator 2026-07-05)",
+    "status": "unverified",
+    "note": "DELL-us, first-syllable stress (operator 2026-07-05) [schema migration 2026-07-14: prior status \"confirmed\" carried no listening evidence and was demoted to unverified. Not known wrong — simply never heard on the target voice.]",
     "source": "operator, 2026-07-05"
   },
   "Doomknell": {
     "say": "Doomnell",
     "ipa": "",
-    "status": "confirmed",
-    "note": "DOOM-nell, silent k (as in knell) (operator 2026-07-06)",
+    "status": "unverified",
+    "note": "DOOM-nell, silent k (as in knell) (operator 2026-07-06) [schema migration 2026-07-14: prior status \"confirmed\" carried no listening evidence and was demoted to unverified. Not known wrong — simply never heard on the target voice.]",
     "source": "operator, 2026-07-06"
   },
   "lead-lined": {
     "say": "led-lined",
     "ipa": "",
-    "status": "confirmed",
+    "status": "ear-confirmed",
     "note": "HOMOGRAPH. The metal lead is /lEd/ (rhymes with 'bed'); the verb lead is /li:d/. They are spelled identically, so a bare 'lead' key would corrupt every verb use ('do not lead them to him'). Only the unambiguous COMPOUND is keyed. Bare metal uses must be reworded in prose ('leaden', 'the metal'); no lexicon can resolve them.",
-    "source": "operator 2026-07-12 (the-war-for-paratua ch08 lead-lined room / ch10 lead-lined cases); EAR-CONFIRMED by operator on Kokoro bm_george, 2026-07-14 (led-lined compound correct AND the verb \"lead\" verified untouched)"
+    "source": "operator 2026-07-12 (the-war-for-paratua ch08 lead-lined room / ch10 lead-lined cases); EAR-CONFIRMED by operator on Kokoro bm_george, 2026-07-14 (led-lined compound correct AND the verb \"lead\" verified untouched)",
+    "verification": {
+      "method": "listening",
+      "voice": "kokoro/bm_george",
+      "date": "2026-07-14"
+    }
   },
   "Lead-lined": {
     "say": "Led-lined",
     "ipa": "",
-    "status": "confirmed",
+    "status": "ear-confirmed",
     "note": "HOMOGRAPH. The metal lead is /lEd/ (rhymes with 'bed'); the verb lead is /li:d/. They are spelled identically, so a bare 'lead' key would corrupt every verb use ('do not lead them to him'). Only the unambiguous COMPOUND is keyed. Bare metal uses must be reworded in prose ('leaden', 'the metal'); no lexicon can resolve them.",
-    "source": "operator 2026-07-12 (the-war-for-paratua ch08 lead-lined room / ch10 lead-lined cases); EAR-CONFIRMED by operator on Kokoro bm_george, 2026-07-14 (led-lined compound correct AND the verb \"lead\" verified untouched)"
+    "source": "operator 2026-07-12 (the-war-for-paratua ch08 lead-lined room / ch10 lead-lined cases); EAR-CONFIRMED by operator on Kokoro bm_george, 2026-07-14 (led-lined compound correct AND the verb \"lead\" verified untouched)",
+    "verification": {
+      "method": "listening",
+      "voice": "kokoro/bm_george",
+      "date": "2026-07-14"
+    }
   },
   "Gia": {
     "say": "Jeeah",
     "ipa": "",
-    "status": "confirmed",
-    "note": "JEE-ah (soft g, as in Gianni). Shedu; Atar's contact on the Plane of Air.",
-    "source": "operator 2026-07-13"
+    "status": "ear-confirmed",
+    "note": "JEE-ah (soft g, as in Gianni). Shedu; Atar's contact on the Plane of Air. [schema migration 2026-07-14: prior status \"confirmed\" carried no listening evidence and was demoted to unverified. Not known wrong — simply never heard on the target voice.]",
+    "source": "operator 2026-07-13",
+    "verification": {
+      "method": "listening",
+      "voice": "kokoro/bm_george",
+      "date": "2026-07-15"
+    }
   },
   "Netheron": {
     "say": "Nether-on",
     "ipa": "",
-    "status": "confirmed",
+    "status": "ear-confirmed",
     "note": "HARD/VOICED th — the sound in 'the' and in the real English word 'nether' (nether region, nethermost). The hyphen is a WORD-JOINER, not stress notation: it hands Kokoro the real word 'nether', whose th English already voices, then joins 'on' so the name reads as one token. Without an entry the engine treats 'Netheron' as an invented string and defaults to the SOFT/voiceless th, which the operator rejected. Same technique as Atar -> 'Ate-tar'.",
-    "source": "operator A/B on Kokoro bm_george, 2026-07-14. NEW entry — Netheron had NO lexicon entry and was guessed by the engine in every render to date (47 uses in Book I). Found by a diagnostic sweep of all 12 invented th-names after the 'breethed' soft-th bug; Netheron was the ONLY one the operator ruled wrong — the other 11, incl. Nargathon (471 uses), were ear-confirmed correct as-is and deliberately have no entry."
+    "source": "operator A/B on Kokoro bm_george, 2026-07-14. NEW entry — Netheron had NO lexicon entry and was guessed by the engine in every render to date (47 uses in Book I). Found by a diagnostic sweep of all 12 invented th-names after the 'breethed' soft-th bug; Netheron was the ONLY one the operator ruled wrong — the other 11, incl. Nargathon (471 uses), were ear-confirmed correct as-is and deliberately have no entry.",
+    "verification": {
+      "method": "listening",
+      "voice": "kokoro/bm_george",
+      "date": "2026-07-14"
+    }
   }
 }
