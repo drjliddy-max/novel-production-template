@@ -16,12 +16,14 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, mkdirSync, writeFileSync, rmSync, existsSync, readdirSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync, existsSync, readdirSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
+
+import { audioFingerprint } from '../lexicon-audio.mjs';
 
 const TOOL = fileURLToPath(new URL('../audiobook-status.mjs', import.meta.url));
 const sha = (s) => createHash('sha256').update(s).digest('hex');
@@ -407,5 +409,137 @@ test('--tracked-only REFUSES --apply (a CI gate must never delete)', () => {
   assert.equal(code, 2);
   assert.match(out, /refusing: --tracked-only is a read-only CI gate/);
   assert.ok(existsSync(join(fx.root, 'ch01', 'chunks', '0003.txt')), 'nothing may be deleted');
+  rmSync(fx.base, { recursive: true, force: true });
+});
+
+// --------------------------------------------------------------------------
+// AUDIO-RELEVANT lexicon fingerprint (lexiconAudioSha256).
+//
+// The bug this section kills: the tracker judged lexicon currency by hashing the
+// WHOLE lexicon file, so a metadata-only migration (status: locked -> unverified)
+// re-staled all 26 Book I units without changing one pronunciation. A one-word
+// `say` fix re-staled every chapter, not just the ones containing the word.
+//
+// With lexiconAudioSha256 present, currency is judged on the (key -> say)
+// substitutions that actually fire against the unit's source.
+// --------------------------------------------------------------------------
+
+// A fixture with a chosen source text and lexicon OBJECT, and a manifest that stamps
+// the audio fingerprint of (source x lexicon). The master lexicon file the tool reads
+// starts equal to that object; a test then mutates the FILE and asserts the verdict.
+function buildAudio({ source, lexicon, audioHash, includeWholeFileHash = true }) {
+  const base = mkdtempSync(join(tmpdir(), 'abaudio-'));
+  const root = join(base, 'audiobook');
+  const manuscripts = join(base, 'manuscripts');
+  const lexicon_path = join(base, 'lexicon.json');
+  mkdirSync(join(root, 'ch01', 'chunks'), { recursive: true });
+  mkdirSync(join(root, 'ch01', 'audio'), { recursive: true });
+  mkdirSync(manuscripts, { recursive: true });
+  const lexText = JSON.stringify(lexicon, null, 2) + '\n';
+  writeFileSync(lexicon_path, lexText);
+  writeFileSync(join(manuscripts, 'ch.md'), source);
+
+  const manifest = {
+    source: join(manuscripts, 'ch.md'),
+    sources: { sourceSha256: sha(source) },
+    ...(includeWholeFileHash ? { lexiconSha256: sha(lexText) } : {}),
+    lexiconAudioSha256: audioHash ?? audioFingerprint(source, lexicon),
+    voice_profile: 'bm_george',
+    chunk_count: 1,
+    chunks: [{ i: 1, file: 'chunks/0001.txt', chars: 10 }],
+  };
+  writeFileSync(join(root, 'ch01', 'manifest.json'), JSON.stringify(manifest, null, 2));
+  writeFileSync(join(root, 'ch01', 'chunks', '0001.txt'), 'text\n');
+  writeFileSync(join(root, 'ch01', 'audio', '0001.wav'), 'RIFF');
+  writeFileSync(join(root, 'ch01', 'audio', '_voice.json'), JSON.stringify({
+    engine: 'kokoro', voice: 'bm_george', quotes_stripped: true,
+    mode: 'story-narration', renderedAt: '2026-07-12T12:00:00.000Z',
+  }));
+  return { base, root, manuscripts, lexicon: lexicon_path };
+}
+
+const SRC = '# Ch\n\nAerendyl rode to Cirshe and passed the Face of Ritilia.\n';
+const LEX0 = {
+  Aerendyl: { say: 'Airrendil', status: 'locked', note: '' },
+  Cirshe: { say: 'Kirsha', status: 'locked' },
+  'Face of Ritilia': { say: 'Face of Rit-ill-ee-a', status: 'confirmed' },
+  Unused: { say: 'Zzz', status: 'locked' }, // never appears in SRC
+};
+
+test('audio fingerprint present + lexicon unchanged -> CURRENT', () => {
+  const fx = buildAudio({ source: SRC, lexicon: LEX0 });
+  const { out, code } = run(fx);
+  assert.match(out, /ch01\s+CURRENT/);
+  assert.equal(code, 0);
+  rmSync(fx.base, { recursive: true, force: true });
+});
+
+test('metadata-only lexicon edit (status/note/verification) -> stays CURRENT (the fix)', () => {
+  const fx = buildAudio({ source: SRC, lexicon: LEX0 });
+  // Simulate the real schema migration: every entry demoted, notes appended, whole-file
+  // hash changes -- but no `say` changes. The OLD tracker called this STALE for all units.
+  const migrated = JSON.parse(JSON.stringify(LEX0));
+  for (const k of Object.keys(migrated)) {
+    migrated[k].status = 'unverified';
+    migrated[k].note = (migrated[k].note || '') + ' [schema migration 2026-07-14]';
+    migrated[k].verification = { method: 'listening', voice: 'kokoro/bm_george', date: '2026-07-14' };
+  }
+  writeFileSync(fx.lexicon, JSON.stringify(migrated, null, 2) + '\n');
+  const { out, code } = run(fx);
+  assert.match(out, /ch01\s+CURRENT/, 'a metadata-only lexicon edit must NOT stale the unit');
+  assert.equal(code, 0);
+  rmSync(fx.base, { recursive: true, force: true });
+});
+
+test('say-change to a key the source CONTAINS -> STALE (must re-render)', () => {
+  const fx = buildAudio({ source: SRC, lexicon: LEX0 });
+  const changed = JSON.parse(JSON.stringify(LEX0));
+  changed.Cirshe.say = 'Keersh'; // Cirshe appears in SRC
+  writeFileSync(fx.lexicon, JSON.stringify(changed, null, 2) + '\n');
+  const { out, code } = run(fx);
+  assert.match(out, /ch01\s+STALE \(lexicon changed\)/);
+  assert.equal(code, 1);
+  rmSync(fx.base, { recursive: true, force: true });
+});
+
+test('say-change to a key the source does NOT contain -> stays CURRENT (only affected chapters stale)', () => {
+  const fx = buildAudio({ source: SRC, lexicon: LEX0 });
+  const changed = JSON.parse(JSON.stringify(LEX0));
+  changed.Unused.say = 'Qqq'; // Unused never appears in SRC
+  writeFileSync(fx.lexicon, JSON.stringify(changed, null, 2) + '\n');
+  const { out, code } = run(fx);
+  assert.match(out, /ch01\s+CURRENT/, 'a word this unit does not contain must not stale it');
+  assert.equal(code, 0);
+  rmSync(fx.base, { recursive: true, force: true });
+});
+
+test('audio fingerprint works in --tracked-only (CI): metadata edit stays TRACKED-OK', () => {
+  const fx = buildAudio({ source: SRC, lexicon: LEX0 });
+  rmSync(join(fx.root, 'ch01', 'audio'), { recursive: true, force: true }); // as on a CI runner
+  const migrated = JSON.parse(JSON.stringify(LEX0));
+  for (const k of Object.keys(migrated)) migrated[k].status = 'unverified';
+  writeFileSync(fx.lexicon, JSON.stringify(migrated, null, 2) + '\n');
+  const { out, code } = run(fx, { trackedOnly: true });
+  assert.match(out, /ch01\s+TRACKED-OK/);
+  assert.equal(code, 0);
+  rmSync(fx.base, { recursive: true, force: true });
+});
+
+test('legacy manifest (no lexiconAudioSha256) still uses the whole-file compare', () => {
+  // Back-compat: before re-stamping, a unit with only lexiconSha256 must behave exactly
+  // as before -- a changed lexicon file is STALE.
+  const fx = buildAudio({ source: SRC, lexicon: LEX0 });
+  // strip the audio hash to simulate a legacy manifest
+  const mp = join(fx.root, 'ch01', 'manifest.json');
+  const man = JSON.parse(readFileSync(mp, 'utf8'));
+  delete man.lexiconAudioSha256;
+  writeFileSync(mp, JSON.stringify(man, null, 2));
+  // any file change (even metadata) trips the whole-file hash for a legacy manifest
+  const migrated = JSON.parse(JSON.stringify(LEX0));
+  migrated.Aerendyl.status = 'unverified';
+  writeFileSync(fx.lexicon, JSON.stringify(migrated, null, 2) + '\n');
+  const { out, code } = run(fx);
+  assert.match(out, /ch01\s+STALE \(lexicon changed\)/);
+  assert.equal(code, 1);
   rmSync(fx.base, { recursive: true, force: true });
 });
