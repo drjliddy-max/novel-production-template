@@ -1,0 +1,165 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://drjliddy-max/novel-production-template/schemas/prose-audit-map.schema.json",
+  "title": "Prose Audit Portable Map",
+  "description": "A portable, project-neutral structured map. It is a DERIVED index of an authoritative map/canon (e.g. the-war-for-paratua canon/pages/geography/map_of_paratua.md and the campaign map image); it never replaces that source of truth. It supports qualitative relationships (bearings, adjacency) where coordinates are unknown, and marks uncertainty explicitly rather than forcing false precision. See PROSE_AUDIT_CAPABILITY_SPEC.md section E.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "project", "provenance", "places"],
+  "properties": {
+    "schema_version": { "type": "string", "const": "1.0.0" },
+    "project": { "type": "string", "description": "Consumer project key, e.g. the-war-for-paratua." },
+    "provenance": {
+      "type": "object",
+      "description": "Where this derived index came from and how current it is. This index is not canon; it points at canon.",
+      "additionalProperties": false,
+      "required": ["derived_from", "review_status"],
+      "properties": {
+        "derived_from": {
+          "type": "array",
+          "description": "Authoritative sources this index was built from (paths/names only).",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "captured_at": { "type": ["string", "null"], "description": "ISO date the index was captured/reviewed. Passed in; never machine-clock-derived here." },
+        "review_status": { "type": "string", "enum": ["draft", "operator-reviewed", "stale"] },
+        "notes": { "type": "string" }
+      }
+    },
+    "bearing_vocabulary": {
+      "type": "array",
+      "description": "The permitted qualitative bearings used by places[].relative_bearings and routes[].bearing.",
+      "items": { "type": "string", "enum": ["N", "NE", "E", "SE", "S", "SW", "W", "NW", "central", "unknown"] },
+      "default": ["N", "NE", "E", "SE", "S", "SW", "W", "NW", "central", "unknown"]
+    },
+    "places": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["place_id", "canonical_name", "place_type", "provenance"],
+        "properties": {
+          "place_id": {
+            "type": "string",
+            "description": "Stable canonical id, kebab-case. e.g. luthan-rise, luthan-mts, cirshe, putakta.",
+            "pattern": "^[a-z0-9][a-z0-9-]*$"
+          },
+          "canonical_name": { "type": "string", "description": "The name canon uses in prose." },
+          "aliases": {
+            "type": "array",
+            "description": "Other names/spellings that refer to this same place. Used to resolve prose mentions. An alias is a name, not a separate place.",
+            "items": { "type": "string" },
+            "default": []
+          },
+          "confusable_with": {
+            "type": "array",
+            "description": "Place ids this place is commonly conflated with (e.g. luthan-rise vs luthan-mts). Drives high-value consistency checks.",
+            "items": { "type": "string" },
+            "default": []
+          },
+          "place_type": {
+            "type": "string",
+            "enum": ["city", "town", "keep", "fort", "castle", "mountains", "hills", "rise", "plains", "plateau", "forest", "swamp", "desert", "coast", "harbor", "island", "river", "lake", "sea", "road", "pass", "cave", "temple", "tomb", "ruin", "region", "chasm", "volcano", "other"]
+          },
+          "terrain": {
+            "type": "array",
+            "description": "Terrain descriptors. A prose terrain word that contradicts these (e.g. calling hills 'mountains') is a candidate contradiction.",
+            "items": { "type": "string", "enum": ["mountain", "hill", "plain", "forest", "swamp", "desert", "coast", "water", "river", "volcanic", "urban", "mixed"] },
+            "default": []
+          },
+          "contained_by": {
+            "type": ["string", "null"],
+            "description": "place_id of the region/containment parent, or null. Supports adjacency/containment checks."
+          },
+          "coordinates": {
+            "type": ["object", "null"],
+            "description": "Grid coordinates when known from the map sheet (0-80 on both axes). Null when unknown. Qualitative relationships must still be usable without this.",
+            "additionalProperties": false,
+            "properties": {
+              "grid_x": { "type": "number" },
+              "grid_y": { "type": "number" },
+              "uncertainty": { "type": "string", "enum": ["exact", "approximate", "unknown"] }
+            }
+          },
+          "relative_bearings": {
+            "type": "array",
+            "description": "Qualitative bearing of this place relative to a reference place, used when coordinates are unknown. e.g. luthan-rise is S of cirshe.",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["from_place", "bearing"],
+              "properties": {
+                "from_place": { "type": "string", "description": "reference place_id" },
+                "bearing": { "type": "string", "enum": ["N", "NE", "E", "SE", "S", "SW", "W", "NW", "central", "unknown"] },
+                "certainty": { "type": "string", "enum": ["map-verified", "inferred", "unknown"], "default": "map-verified" }
+              }
+            },
+            "default": []
+          },
+          "adjacency": {
+            "type": "array",
+            "description": "place_ids that physically neighbor this place (share a border/route endpoint).",
+            "items": { "type": "string" },
+            "default": []
+          },
+          "provenance": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["source_ref", "certainty"],
+            "properties": {
+              "source_ref": { "type": "string", "description": "Authoritative source for this place record." },
+              "certainty": { "type": "string", "enum": ["map-verified", "operator-stated", "inferred", "unknown"] },
+              "notes": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "routes": {
+      "type": "array",
+      "description": "Named or endpoint-defined routes between places, with mode and any required crossings/barriers.",
+      "default": [],
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["route_id", "from_place", "to_place", "mode", "provenance"],
+        "properties": {
+          "route_id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+          "name": { "type": ["string", "null"], "description": "Canon road name if any, e.g. great-western-road." },
+          "from_place": { "type": "string" },
+          "to_place": { "type": "string" },
+          "mode": { "type": "string", "enum": ["land", "river", "sea", "mixed", "air"] },
+          "sea_character": {
+            "type": ["string", "null"],
+            "description": "For sea/mixed routes: 'coastal' (following a shoreline) vs 'open-crossing' (across open water). Drives the Cirshe->Putakta 'by sea south' vs 'across the ocean' check.",
+            "enum": ["coastal", "open-crossing", "mixed", null]
+          },
+          "bearing": { "type": "string", "enum": ["N", "NE", "E", "SE", "S", "SW", "W", "NW", "central", "unknown"], "description": "Overall direction of travel from from_place to to_place." },
+          "required_crossings": {
+            "type": "array",
+            "description": "Barriers that must be crossed, e.g. a river ford, a pass. Used to catch routes that ignore a required crossing.",
+            "items": { "type": "string" },
+            "default": []
+          },
+          "barriers_avoided": {
+            "type": "array",
+            "description": "Barriers the canonical route deliberately avoids (e.g. a closed pass, a river crossing).",
+            "items": { "type": "string" },
+            "default": []
+          },
+          "uncertainty": { "type": "string", "enum": ["map-verified", "operator-stated", "inferred", "unknown"], "default": "map-verified" },
+          "provenance": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["source_ref"],
+            "properties": {
+              "source_ref": { "type": "string" },
+              "notes": { "type": "string" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

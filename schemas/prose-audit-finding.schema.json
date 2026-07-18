@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://drjliddy-max/novel-production-template/schemas/prose-audit-finding.schema.json",
+  "title": "Prose Audit Finding",
+  "description": "One finding emitted by a prose-audit module. A finding is a claim ABOUT the prose plus its adjudication against an authoritative source. It is never an edit, and it is never canon. Evidence state governs what language the finding may use (see PROSE_AUDIT_CAPABILITY_SPEC.md section B).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "finding_id",
+    "module",
+    "severity",
+    "confidence",
+    "evidence_state",
+    "location",
+    "extracted_claim",
+    "concern",
+    "evidence_refs",
+    "recommended_action",
+    "false_positive_risk"
+  ],
+  "properties": {
+    "finding_id": {
+      "type": "string",
+      "description": "Stable, unique, deterministic id. Convention: PA-<module>-<workkey>-<hash8> where hash8 is the first 8 hex of sha256 over (module + normalized_location + normalized_extracted_claim). Stable across reruns when the input is unchanged.",
+      "pattern": "^PA-[a-z0-9-]+-[a-z0-9]+-[0-9a-f]{8}$"
+    },
+    "module": {
+      "type": "string",
+      "description": "The emitting module.",
+      "enum": [
+        "style-lint",
+        "repetition",
+        "entity-consistency",
+        "timeline-consistency",
+        "geography-consistency",
+        "ai-tell",
+        "adjudication",
+        "report"
+      ]
+    },
+    "severity": {
+      "type": "string",
+      "description": "Editorial impact if the concern is real. Independent of confidence.",
+      "enum": ["blocker", "high", "medium", "low", "info"]
+    },
+    "confidence": {
+      "type": "number",
+      "description": "Adjudicator confidence in [0,1] that the concern is real. For LLM adjudication this is the model-reported or calibrated confidence; never inflate.",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "evidence_state": {
+      "type": "string",
+      "description": "Governs permitted claim language. See section B.",
+      "enum": ["VERIFIED", "LIKELY", "NEEDS_REVIEW", "STALE", "BLOCKED", "FALSE_POSITIVE_RISK"]
+    },
+    "location": {
+      "type": "object",
+      "description": "Where in the prose the extracted claim sits. Names only, never secrets.",
+      "additionalProperties": false,
+      "required": ["source_path"],
+      "properties": {
+        "source_path": { "type": "string", "description": "Repo-relative manuscript path." },
+        "chapter_key": { "type": "string", "description": "Optional chapter key, e.g. 00, 08a." },
+        "line_start": { "type": ["integer", "null"], "minimum": 1 },
+        "line_end": { "type": ["integer", "null"], "minimum": 1 },
+        "excerpt": { "type": "string", "description": "Short verbatim excerpt (bounded); the symptom in context. Never the whole chapter." }
+      }
+    },
+    "extracted_claim": {
+      "type": "string",
+      "description": "The claim the prose makes, as extracted (by rule or by an LLM). This is evidence about what the text says, not a fact about the world."
+    },
+    "authoritative_record": {
+      "type": ["object", "null"],
+      "description": "The canon/map/ledger record the claim was checked against. Null when the module is source-free (e.g. pure style-lint).",
+      "additionalProperties": false,
+      "properties": {
+        "source_kind": {
+          "type": "string",
+          "enum": ["structured-canon", "structured-map", "reviewed-ledger", "derived-index", "prior-audit"]
+        },
+        "source_ref": { "type": "string", "description": "Path or id of the authoritative record, e.g. canon/pages/geography/map_of_paratua.md or a map place_id." },
+        "record_value": { "type": "string", "description": "The authoritative value that the claim was compared to." }
+      }
+    },
+    "concern": {
+      "type": "string",
+      "description": "The contradiction or concern in one sentence: what the prose asserts vs what the authoritative record holds, or the textual symptom for a source-free module."
+    },
+    "evidence_refs": {
+      "type": "array",
+      "description": "Named, resolvable evidence for the finding: file paths, place ids, line refs, prior-audit ids. Never secrets, never absolute machine paths.",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "recommended_action": {
+      "type": "string",
+      "description": "The smallest human editorial action recommended. Never an automatic edit. Human decides."
+    },
+    "false_positive_risk": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["level", "reason"],
+      "properties": {
+        "level": { "type": "string", "enum": ["low", "medium", "high"] },
+        "reason": { "type": "string", "description": "Why this might be a false positive, e.g. figurative language, an alias, an intentional in-world exception, unknown map relationship." }
+      }
+    },
+    "llm_provenance": {
+      "type": ["object", "null"],
+      "description": "Present and non-null iff an LLM participated in extraction or adjudication. Absent for purely deterministic findings.",
+      "additionalProperties": false,
+      "required": ["role", "runtime", "model"],
+      "properties": {
+        "role": { "type": "string", "enum": ["extraction", "adjudication", "extraction+adjudication"] },
+        "runtime": { "type": "string", "description": "e.g. ollama" },
+        "model": { "type": "string", "description": "e.g. gpt-oss:20b" },
+        "prompt_id": { "type": "string", "description": "Stable id/version of the prompt template used." },
+        "elapsed_ms": { "type": ["integer", "null"], "minimum": 0 },
+        "structured_output_valid": { "type": ["boolean", "null"], "description": "Whether the model output validated against the expected output contract." }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "description": "VERIFIED and FALSE_POSITIVE_RISK are deterministic-grade conclusions; if an LLM produced them alone they must be downgraded to LIKELY/NEEDS_REVIEW unless a deterministic check corroborates. Enforced in code, documented here.",
+      "type": "object"
+    }
+  ]
+}

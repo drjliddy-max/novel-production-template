@@ -1,0 +1,205 @@
+{
+  "schema_version": "1.0.0",
+  "description": "Geography-consistency contract fixtures for the prose-audit capability. Seven cases drawn verbatim from the-war-for-paratua Book I, each with the authoritative map evidence and the expected classification. Ground truth for the geography module pilot. map_context is a derived index of canon/pages/geography/map_of_paratua.md and validates against prose-audit-map.schema.json; it is NOT canon and never replaces it.",
+  "map_context": {
+    "schema_version": "1.0.0",
+    "project": "the-war-for-paratua",
+    "provenance": {
+      "derived_from": [
+        "the-war-for-paratua/canon/pages/geography/map_of_paratua.md",
+        "the-war-for-paratua/CLAUDE.md Geography section"
+      ],
+      "captured_at": "2026-07-17",
+      "review_status": "draft",
+      "notes": "Minimal subset for the geography pilot. Re-derive from the map image before production use."
+    },
+    "places": [
+      {
+        "place_id": "cirshe",
+        "canonical_name": "Cirshe",
+        "aliases": ["Cirshen"],
+        "place_type": "city",
+        "terrain": ["coast", "urban", "plain"],
+        "contained_by": null,
+        "coordinates": { "grid_x": 0, "grid_y": 0, "uncertainty": "unknown" },
+        "relative_bearings": [],
+        "adjacency": ["luthan-rise", "putakta"],
+        "provenance": { "source_ref": "map_of_paratua.md: Northwest / Cirshe lands", "certainty": "map-verified", "notes": "Far NW coast, clifftop keep + harbor + flat farmland; NO river through it." }
+      },
+      {
+        "place_id": "luthan-rise",
+        "canonical_name": "Luthan Rise",
+        "aliases": ["Luthan hills", "Luthan Hills", "the Luthans", "the Rise"],
+        "confusable_with": ["luthan-mts", "lutan-plains"],
+        "place_type": "hills",
+        "terrain": ["hill"],
+        "contained_by": null,
+        "coordinates": { "grid_x": 0, "grid_y": 0, "uncertainty": "unknown" },
+        "relative_bearings": [ { "from_place": "cirshe", "bearing": "S", "certainty": "map-verified" } ],
+        "adjacency": ["cirshe", "lutan-plains", "fort-luthan"],
+        "provenance": { "source_ref": "map_of_paratua.md: 'Luthan Rise is HILLS (gnome-held heights), NOT mountains'", "certainty": "operator-stated", "notes": "The Ch02 gnome-crossing terrain, S/S-central of Cirshe. Fort Luthan sits on it." }
+      },
+      {
+        "place_id": "luthan-mts",
+        "canonical_name": "Luthan Mts",
+        "aliases": ["Luthan Mountains"],
+        "confusable_with": ["luthan-rise"],
+        "place_type": "mountains",
+        "terrain": ["mountain"],
+        "contained_by": null,
+        "coordinates": { "grid_x": 0, "grid_y": 0, "uncertainty": "unknown" },
+        "relative_bearings": [ { "from_place": "cirshe", "bearing": "W", "certainty": "map-verified" } ],
+        "adjacency": [],
+        "provenance": { "source_ref": "map_of_paratua.md: 'Luthan Mts - real mountains, far WEST (by The Cleft, Salandra Hills, Gnome Caverns, Northern Woods)'", "certainty": "map-verified", "notes": "Distinct from Luthan Rise. Real mountains, far west, NOT south." }
+      },
+      {
+        "place_id": "lutan-plains",
+        "canonical_name": "Lutan Plains",
+        "aliases": [],
+        "confusable_with": ["luthan-rise"],
+        "place_type": "plains",
+        "terrain": ["plain"],
+        "contained_by": null,
+        "relative_bearings": [ { "from_place": "luthan-rise", "bearing": "S", "certainty": "map-verified" } ],
+        "adjacency": ["luthan-rise", "moryn-mts"],
+        "provenance": { "source_ref": "map_of_paratua.md: 'Lutan Plains - open ground south of the Rise'", "certainty": "map-verified" }
+      },
+      {
+        "place_id": "putakta",
+        "canonical_name": "Putakta",
+        "aliases": ["Putatka"],
+        "place_type": "city",
+        "terrain": ["coast"],
+        "contained_by": null,
+        "relative_bearings": [ { "from_place": "cirshe", "bearing": "S", "certainty": "map-verified" } ],
+        "adjacency": ["cirshe"],
+        "provenance": { "source_ref": "map_of_paratua.md: 'Putakta (SW coast)'; CLAUDE.md: 'Putakta - Southwest coast, sea trade with Cirshe'", "certainty": "map-verified", "notes": "SW coast. Reached from Cirshe by a southward COASTAL sea route down the western shore, not an open-ocean transverse crossing. Canon (rulings) also notes 'sea-only-to-Putakta' after the pass closed." }
+      },
+      {
+        "place_id": "moryn-mts",
+        "canonical_name": "Moryn Mts",
+        "aliases": ["Moryn Range", "the Moryn"],
+        "place_type": "mountains",
+        "terrain": ["mountain"],
+        "contained_by": null,
+        "relative_bearings": [ { "from_place": "cirshe", "bearing": "S", "certainty": "map-verified" } ],
+        "adjacency": ["lutan-plains"],
+        "provenance": { "source_ref": "map_of_paratua.md: 'Direction from Cirshe to the Moryn Mts is SOUTH, not east.'", "certainty": "map-verified" }
+      },
+      {
+        "place_id": "fort-luthan",
+        "canonical_name": "Fort Luthan",
+        "aliases": [],
+        "place_type": "fort",
+        "terrain": ["hill"],
+        "contained_by": "luthan-rise",
+        "adjacency": ["luthan-rise"],
+        "provenance": { "source_ref": "map_of_paratua.md: 'Fort Luthan on the Luthan Rise - the one land gate'", "certainty": "map-verified" }
+      },
+      {
+        "place_id": "calet",
+        "canonical_name": "Calet",
+        "aliases": [],
+        "place_type": "city",
+        "terrain": ["plain"],
+        "contained_by": null,
+        "relative_bearings": [ { "from_place": "cirshe", "bearing": "S", "certainty": "map-verified" } ],
+        "adjacency": [],
+        "provenance": { "source_ref": "map_of_paratua.md: south-center, near the Moryn", "certainty": "map-verified" }
+      }
+    ],
+    "routes": [
+      {
+        "route_id": "cirshe-putakta-sea",
+        "name": null,
+        "from_place": "cirshe",
+        "to_place": "putakta",
+        "mode": "sea",
+        "sea_character": "coastal",
+        "bearing": "S",
+        "required_crossings": [],
+        "barriers_avoided": [],
+        "uncertainty": "map-verified",
+        "provenance": { "source_ref": "map_of_paratua.md + CLAUDE.md geography; Putakta SW coast reached by southward coastal sea traffic from Cirshe NW coast", "notes": "Coastal-south, not open-ocean crossing." }
+      },
+      {
+        "route_id": "great-western-road",
+        "name": "great-western-road",
+        "from_place": "cirshe",
+        "to_place": "fort-luthan",
+        "mode": "land",
+        "sea_character": null,
+        "bearing": "S",
+        "required_crossings": [],
+        "barriers_avoided": ["cirshe-southern-river"],
+        "uncertainty": "operator-stated",
+        "provenance": { "source_ref": "map_of_paratua.md: 'Great Western Road (Cirshe to Fort Luthan; operator-canonized)'" }
+      }
+    ]
+  },
+  "cases": [
+    {
+      "case_id": "geo-luthan-mts-south",
+      "kind": "contradiction",
+      "location": { "source_path": "manuscripts/book1/00_prologue.md", "chapter_key": "00", "line_start": 73, "excerpt": "To the south, the Luthan Mountains rose in a long ridge that separated the settled lands from the deeper wilderness beyond." },
+      "extracted_claim": "The mountainous Luthan feature lies to the south of Cirshe (named 'Luthan Mountains', terrain: mountains).",
+      "authoritative_ref": { "kind": "structured-map", "place_ids": ["luthan-rise", "luthan-mts"], "route_ids": [], "record_value": "The Luthan feature SOUTH of Cirshe is the Luthan Rise (terrain: hills). The Luthan Mts (terrain: mountains) lie far WEST, not south." },
+      "expected": { "evidence_state": "LIKELY", "is_contradiction": true, "severity": "medium", "confidence_min": 0.6, "false_positive_risk": "medium" },
+      "notes": "Operator-cited example. The southern Luthan feature should read as the Luthan Rise / hills. FP risk medium because a real 'Luthan Mts' exists, but it is west, so 'to the south ... Luthan Mountains' still contradicts the map."
+    },
+    {
+      "case_id": "geo-putakta-across-ocean",
+      "kind": "contradiction",
+      "location": { "source_path": "manuscripts/book1/00_prologue.md", "chapter_key": "00", "line_start": 73, "excerpt": "its trade running south by land to Calet and across the ocean to Putakta" },
+      "extracted_claim": "Cirshe-to-Putakta trade goes 'across the ocean' (an open-ocean crossing).",
+      "authoritative_ref": { "kind": "structured-map", "place_ids": ["cirshe", "putakta"], "route_ids": ["cirshe-putakta-sea"], "record_value": "Cirshe (NW coast) to Putakta (SW coast) is a southward COASTAL sea route, not an open-ocean transverse crossing." },
+      "expected": { "evidence_state": "LIKELY", "is_contradiction": true, "severity": "low", "confidence_min": 0.5, "false_positive_risk": "medium" },
+      "notes": "Operator-cited example: 'by sea south to Putakta, not across the sea.' 'across the ocean' mischaracterizes a coastal-south route. FP risk medium: 'across the ocean' can be loose idiom for 'by sea'."
+    },
+    {
+      "case_id": "geo-luthan-rise-hills-control",
+      "kind": "consistent",
+      "location": { "source_path": "manuscripts/book1/02_scattering.md", "chapter_key": "02", "line_start": 135, "excerpt": "the rolling country steepened into the first ridges of the Luthan Rise. The Great Western Road climbed there toward Fort Luthan ... skirting the garrison through the hills to the west" },
+      "extracted_claim": "The Luthan crossing south of Cirshe is the Luthan Rise (terrain: hills), with the Great Western Road and Fort Luthan.",
+      "authoritative_ref": { "kind": "structured-map", "place_ids": ["luthan-rise", "fort-luthan"], "route_ids": ["great-western-road"], "record_value": "Luthan Rise: hills, S of Cirshe, Fort Luthan on it, Great Western Road. Matches." },
+      "expected": { "evidence_state": "VERIFIED", "is_contradiction": false, "severity": "info", "confidence_min": 0.8, "false_positive_risk": "low" },
+      "notes": "TRUE-NEGATIVE control. Correct terrain (hills) and features. Must NOT be flagged."
+    },
+    {
+      "case_id": "geo-luthan-hills-control2",
+      "kind": "consistent",
+      "location": { "source_path": "manuscripts/book1/05_lost_year.md", "chapter_key": "05", "line_start": 75, "excerpt": "up into the Luthan Hills, the long folded country the gnomes had held since before the Order fell" },
+      "extracted_claim": "The Luthan feature is the Luthan Hills (terrain: hills), gnome-held.",
+      "authoritative_ref": { "kind": "structured-map", "place_ids": ["luthan-rise"], "route_ids": [], "record_value": "Luthan Rise: hills, gnome-held. 'Luthan Hills' is a canonical alias. Matches." },
+      "expected": { "evidence_state": "VERIFIED", "is_contradiction": false, "severity": "info", "confidence_min": 0.8, "false_positive_risk": "low" },
+      "notes": "TRUE-NEGATIVE control. 'Luthan Hills' is the correct terrain word."
+    },
+    {
+      "case_id": "geo-ch10-river-metaphor",
+      "kind": "false-positive-avoidance",
+      "location": { "source_path": "manuscripts/book1/10_return_to_cirshe.md", "chapter_key": "10", "line_start": 239, "excerpt": "a broad, sloping avenue paved in river stone that descended through the merchant quarter toward the harbor ... the way water fills the hole left by a stone removed from a riverbed" },
+      "extracted_claim": "The words 'river stone' (a paving material) and 'riverbed' (a simile) appear in a Cirshe scene.",
+      "authoritative_ref": { "kind": "structured-map", "place_ids": ["cirshe"], "route_ids": [], "record_value": "Cirshe has NO river through it (nearest river ~50mi south). The historical Ch10 'river through Cirshe' conflict was resolved; these tokens are figurative/material, not a geographic river claim." },
+      "expected": { "evidence_state": "FALSE_POSITIVE_RISK", "is_contradiction": false, "severity": "info", "confidence_min": 0.5, "false_positive_risk": "high" },
+      "notes": "FALSE-POSITIVE-AVOIDANCE. A naive keyword matcher would flag 'river' in Cirshe. The adjudicator must recognize figurative/material usage and NOT report a contradiction. Guards against regressing a fixed issue."
+    },
+    {
+      "case_id": "geo-putakta-crossed-ambiguous",
+      "kind": "ambiguous",
+      "location": { "source_path": "manuscripts/book1/01_coup.md", "chapter_key": "01", "line_start": 31, "excerpt": "Sea traffic from Putakta crossed to its docks" },
+      "extracted_claim": "Sea traffic 'crossed' from Putakta to Cirshe's docks.",
+      "authoritative_ref": { "kind": "structured-map", "place_ids": ["cirshe", "putakta"], "route_ids": ["cirshe-putakta-sea"], "record_value": "Coastal-south sea route. 'crossed' is ambiguous: idiomatic 'came over by sea' vs an open-water crossing." },
+      "expected": { "evidence_state": "NEEDS_REVIEW", "is_contradiction": null, "severity": "low", "confidence_min": 0.0, "false_positive_risk": "high" },
+      "notes": "INTENTIONAL AMBIGUOUS case. 'crossed to its docks' is defensible as idiom. The adjudicator must defer to a human (NEEDS_REVIEW), not assert a contradiction."
+    },
+    {
+      "case_id": "geo-eastern-luthans-ambiguous",
+      "kind": "ambiguous",
+      "location": { "source_path": "manuscripts/book1/01_coup.md", "chapter_key": "01", "line_start": 31, "excerpt": "the tin that came down from the mines in the eastern Luthans" },
+      "extracted_claim": "There are tin mines in the 'eastern Luthans'.",
+      "authoritative_ref": { "kind": "structured-map", "place_ids": ["luthan-rise", "luthan-mts"], "route_ids": [], "record_value": "The map records tin from Luthan mines but does NOT clearly pin the mines' east/west position; 'eastern Luthans' can be neither confirmed nor refuted from the current index." },
+      "expected": { "evidence_state": "NEEDS_REVIEW", "is_contradiction": null, "severity": "low", "confidence_min": 0.0, "false_positive_risk": "high" },
+      "notes": "INTENTIONAL AMBIGUOUS case where the authoritative source is SILENT. The adjudicator must NOT fabricate a contradiction; it defers (NEEDS_REVIEW / effectively BLOCKED on canon)."
+    }
+  ]
+}
