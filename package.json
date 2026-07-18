@@ -5,6 +5,6 @@
   "type": "module",
   "description": "Novel production template: narration prep, pronunciation lexicon, and the audiobook status tracker.",
   "scripts": {
-    "test": "node --test narration/test/"
+    "test": "node --test narration/test/ prose-audit/"
   }
 }

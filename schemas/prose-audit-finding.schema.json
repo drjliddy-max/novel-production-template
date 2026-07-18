@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://drjliddy-max/novel-production-template/schemas/prose-audit-finding.schema.json",
-  "title": "Prose Audit Finding",
-  "description": "One finding emitted by a prose-audit module. A finding is a claim ABOUT the prose plus its adjudication against an authoritative source. It is never an edit, and it is never canon. Evidence state governs what language the finding may use (see PROSE_AUDIT_CAPABILITY_SPEC.md section B).",
+  "title": "Prose Audit Finding (v1.1.0)",
+  "description": "One finding emitted by a prose-audit module. A finding is a claim ABOUT the prose plus its adjudication against an authoritative source. It is never an edit, and it is never canon. Evidence state governs what language the finding may use (see PROSE_AUDIT_CAPABILITY_SPEC.md sections B and J). v1.1.0 adds the OPTIONAL evidence-first fields decision_state and claim_coverage (backward compatible: v1.0 findings without them still validate). Absence of contradictory evidence is NOT support: decision_state SUPPORTED requires affirmative authoritative evidence; 'not contradicted' maps to INSUFFICIENT_EVIDENCE, never VERIFIED.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -119,6 +119,30 @@
         "prompt_id": { "type": "string", "description": "Stable id/version of the prompt template used." },
         "elapsed_ms": { "type": ["integer", "null"], "minimum": 0 },
         "structured_output_valid": { "type": ["boolean", "null"], "description": "Whether the model output validated against the expected output contract." }
+      }
+    },
+    "schema_version": {
+      "type": "string",
+      "description": "Finding contract version, e.g. 1.1.0. Optional for backward compatibility with 1.0 findings."
+    },
+    "decision_state": {
+      "type": "string",
+      "description": "Evidence-first adjudication result (v1.1.0). Computed by the deterministic gate from structured evidence, NOT from a model's free-text verdict or confidence. Maps to evidence_state: CONTRADICTED->LIKELY (or VERIFIED with deterministic corroboration), SUPPORTED->VERIFIED, INSUFFICIENT_EVIDENCE->NEEDS_REVIEW/BLOCKED, AMBIGUOUS->NEEDS_REVIEW, NOT_APPLICABLE->FALSE_POSITIVE_RISK, ADJUDICATION_ERROR->BLOCKED. SUPPORTED requires affirmative authoritative support of every material component; absence of contradiction is not support.",
+      "enum": ["CONTRADICTED", "SUPPORTED", "INSUFFICIENT_EVIDENCE", "AMBIGUOUS", "NOT_APPLICABLE", "ADJUDICATION_ERROR"]
+    },
+    "claim_coverage": {
+      "type": "array",
+      "description": "Per-component decomposition of a (possibly compound) claim (v1.1.0). Every material component is marked, so partial support cannot be reported as full support (coverage invariant).",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["component", "status"],
+        "properties": {
+          "component": { "type": "string", "description": "The material sub-claim." },
+          "status": { "type": "string", "enum": ["supported", "contradicted", "unresolved", "not_applicable"] },
+          "evidence_ref": { "type": ["string", "null"], "description": "Resolvable authoritative reference (place_id/route_id) or null. supported/contradicted require a resolvable ref." },
+          "note": { "type": "string" }
+        }
       }
     }
   },
