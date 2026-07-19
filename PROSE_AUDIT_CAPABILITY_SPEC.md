@@ -62,6 +62,10 @@ requirements below are met and cited.
 Promotion rule: an LLM-only conclusion may be at most `LIKELY` (for a concern) or `NEEDS_REVIEW`
 (for ambiguity). `VERIFIED` and a firm not-an-issue require deterministic corroboration.
 
+**Evidence-sufficiency rule (see section J):** "not contradicted" is NOT "verified". A claim reaches a
+clean/supported state only when the retrieved authority AFFIRMATIVELY supports it. Absence of
+contradictory evidence, and model confidence, are never sufficient on their own.
+
 ---
 
 ## C. Modular architecture
@@ -221,3 +225,60 @@ them and builds a derived index; it never forks or re-hosts them.
 
 **Migration end-state:** the Paratua WIP audit script is retired in favor of a Paratua config + adapter
 over this capability; canon/map/ledgers are untouched and remain canonical in `the-war-for-paratua`.
+
+---
+
+## J. Evidence-first decision contract (revision, 2026-07-17)
+
+The v1 pilot exposed a contract defect: a model verdict of "not contradicted" was allowed to become
+"consistent", even when the authoritative source was silent or insufficient. This section defines the
+corrected contract. Reference implementation: `prose-audit/gate.mjs` (+ `prose-audit/gate.test.mjs`).
+
+**Decision states** (project-neutral; the adjudication module classifies into exactly one):
+
+| decision_state | Meaning | Evidence taxonomy (section B) |
+|---|---|---|
+| `CONTRADICTED` | An authoritative record directly contradicts a material component (with a resolvable reference). | `LIKELY` (LLM); `VERIFIED` only with deterministic corroboration. |
+| `SUPPORTED` | Every material component is AFFIRMATIVELY supported by a resolvable authoritative record AND the source addresses the claim. | `VERIFIED`. |
+| `INSUFFICIENT_EVIDENCE` | The source is silent on, or does not cover, a material part of the claim. | `NEEDS_REVIEW` (or `BLOCKED`). |
+| `AMBIGUOUS` | The source addresses the claim but it admits more than one valid reading. | `NEEDS_REVIEW`. |
+| `NOT_APPLICABLE` | Figurative or non-geographic language; not a checkable geographic claim. | `FALSE_POSITIVE_RISK`. |
+| `ADJUDICATION_ERROR` | Malformed output, missing fields, unresolved references, or internally inconsistent authority. | `BLOCKED`. |
+
+**The evidence-sufficiency rule:** a claim is `SUPPORTED` ONLY when the retrieved authority affirmatively
+supports every material component. Absence of contradictory evidence is NOT support. Model confidence is
+advisory metadata and is NEVER the gate.
+
+**Deterministic invariants** (applied after the model, computed from STRUCTURED fields, not free text
+where possible; each fails closed):
+
+1. **Source silence.** If the authority does not address a material part of the claim
+   (`source_addresses_claim=false`), the result cannot be `SUPPORTED` (-> `INSUFFICIENT_EVIDENCE`).
+2. **Rationale/verdict consistency.** If the structured coverage is clean but the rationale declares
+   missing/ambiguous/unverifiable evidence, downgrade a would-be `SUPPORTED` to `INSUFFICIENT_EVIDENCE`.
+   Structured coverage fields are primary; the rationale scan is a secondary backstop, downgrade-only.
+3. **Evidence reference.** `SUPPORTED` and `CONTRADICTED` require at least one resolvable authoritative
+   reference (a place_id/route_id present in the map). A contradiction citing an invented place does not
+   stand.
+4. **Coverage.** Every material component is marked supported/contradicted/unresolved/not_applicable. If
+   any material component is unresolved, the claim cannot be fully `SUPPORTED`.
+5. **Fail closed.** Invalid JSON, missing fields, unresolved place IDs, missing authoritative records, or
+   internally inconsistent fields (same reference asserted both supported and contradicted) produce
+   `ADJUDICATION_ERROR`, never a clean result.
+6. **Figurative language.** Nonliteral terrain/route language does not become a geographic contradiction
+   without adequate contextual evidence (-> `NOT_APPLICABLE`).
+7. **Evidence-reference relevance / entity presence (revision 2, 2026-07-18).** A reference must not only
+   RESOLVE, it must be RELEVANT to the material entity the component is about. Each supported/contradicted
+   component names its material `entity`; the gate resolves that entity to a map place by name/alias and
+   requires `evidence_ref` to be relevant to it (the ref IS the entity, a route with the entity as an
+   endpoint, or a documented containment/adjacency relation). Consequences, all fail-closed:
+   - an entity ABSENT from the map (invented) routes to `INSUFFICIENT_EVIDENCE`; absence never becomes
+     `CONTRADICTED` even if the model cites a resolvable but unrelated reference;
+   - a resolvable-but-irrelevant reference is not valid support/contradiction evidence (component ->
+     unresolved);
+   - a shared/ambiguous alias (entity resolving to more than one place) routes to `AMBIGUOUS`;
+   - a supported/contradicted component with MISSING entity metadata fails closed (-> unresolved).
+   This closes the `syn-invented-place-zarnuth` false-contradiction class. Confidence remains advisory.
+
+This contract is model-neutral: the schema and gate encode evidence sufficiency, not any model's
+behavior. The adjudicator model only fills the structured fields; the gate decides.
