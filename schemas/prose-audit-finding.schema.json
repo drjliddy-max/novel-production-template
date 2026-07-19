@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://drjliddy-max/novel-production-template/schemas/prose-audit-finding.schema.json",
-  "title": "Prose Audit Finding (v1.1.0)",
-  "description": "One finding emitted by a prose-audit module. A finding is a claim ABOUT the prose plus its adjudication against an authoritative source. It is never an edit, and it is never canon. Evidence state governs what language the finding may use (see PROSE_AUDIT_CAPABILITY_SPEC.md sections B and J). v1.1.0 adds the OPTIONAL evidence-first fields decision_state and claim_coverage (backward compatible: v1.0 findings without them still validate). Absence of contradictory evidence is NOT support: decision_state SUPPORTED requires affirmative authoritative evidence; 'not contradicted' maps to INSUFFICIENT_EVIDENCE, never VERIFIED.",
+  "title": "Prose Audit Finding (v1.2.0)",
+  "description": "One finding emitted by a prose-audit module. A finding is a claim ABOUT the prose plus its adjudication against an authoritative source. It is never an edit, and it is never canon. Evidence state governs what language the finding may use (see PROSE_AUDIT_CAPABILITY_SPEC.md sections B and J). v1.1.0 added OPTIONAL decision_state + claim_coverage. v1.2.0 adds an OPTIONAL claim_coverage[].entity (the material named place/feature a component is about) so the deterministic gate can enforce evidence-reference RELEVANCE and entity-presence. All additive and backward compatible: v1.0/v1.1 findings still validate. Absence of contradictory evidence is NOT support; a reference that resolves but is irrelevant to the claimed entity is not valid support/contradiction evidence; an entity absent from the map routes to INSUFFICIENT_EVIDENCE.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -140,7 +140,8 @@
         "properties": {
           "component": { "type": "string", "description": "The material sub-claim." },
           "status": { "type": "string", "enum": ["supported", "contradicted", "unresolved", "not_applicable"] },
-          "evidence_ref": { "type": ["string", "null"], "description": "Resolvable authoritative reference (place_id/route_id) or null. supported/contradicted require a resolvable ref." },
+          "entity": { "type": "string", "description": "v1.2.0. The primary named place/feature this component is ABOUT (e.g. 'Luthan Mountains', 'Putakta'). The gate resolves it to a map place by name/alias and requires evidence_ref to be RELEVANT to it; a supported/contradicted component with a missing or absent entity fails closed to unresolved. Optional for backward compatibility, but required in practice for a supported/contradicted verdict to stand." },
+          "evidence_ref": { "type": ["string", "null"], "description": "Resolvable authoritative reference (place_id/route_id) or null. supported/contradicted require a resolvable AND relevant ref (relevant to `entity`: the ref is the entity, a route with the entity as an endpoint, or a containment/adjacency relation)." },
           "note": { "type": "string" }
         }
       }

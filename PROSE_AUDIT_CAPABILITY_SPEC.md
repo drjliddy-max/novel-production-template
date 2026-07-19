@@ -267,6 +267,18 @@ where possible; each fails closed):
    `ADJUDICATION_ERROR`, never a clean result.
 6. **Figurative language.** Nonliteral terrain/route language does not become a geographic contradiction
    without adequate contextual evidence (-> `NOT_APPLICABLE`).
+7. **Evidence-reference relevance / entity presence (revision 2, 2026-07-18).** A reference must not only
+   RESOLVE, it must be RELEVANT to the material entity the component is about. Each supported/contradicted
+   component names its material `entity`; the gate resolves that entity to a map place by name/alias and
+   requires `evidence_ref` to be relevant to it (the ref IS the entity, a route with the entity as an
+   endpoint, or a documented containment/adjacency relation). Consequences, all fail-closed:
+   - an entity ABSENT from the map (invented) routes to `INSUFFICIENT_EVIDENCE`; absence never becomes
+     `CONTRADICTED` even if the model cites a resolvable but unrelated reference;
+   - a resolvable-but-irrelevant reference is not valid support/contradiction evidence (component ->
+     unresolved);
+   - a shared/ambiguous alias (entity resolving to more than one place) routes to `AMBIGUOUS`;
+   - a supported/contradicted component with MISSING entity metadata fails closed (-> unresolved).
+   This closes the `syn-invented-place-zarnuth` false-contradiction class. Confidence remains advisory.
 
 This contract is model-neutral: the schema and gate encode evidence sufficiency, not any model's
 behavior. The adjudicator model only fills the structured fields; the gate decides.

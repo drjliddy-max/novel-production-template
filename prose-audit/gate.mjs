@@ -1,30 +1,32 @@
 // gate.mjs - the deterministic evidence-first adjudication gate for the prose-audit capability.
 //
-// WHY THIS EXISTS (the REVISE defect it corrects):
-// The v1 pilot let "not proven contradictory" collapse into "consistent", even when the authoritative
-// source was silent or insufficient. A model verdict of is_contradiction=false was trusted directly.
-// This gate replaces that binary model with an EVIDENCE-FIRST state model computed deterministically
-// from the model's STRUCTURED fields (never from the model's own final label, never from confidence).
+// WHY THIS EXISTS (defects it corrects):
+// (1) v1: "not proven contradictory" collapsed into "consistent". Absence of contradiction is NOT
+//     affirmative support. Confidence is advisory only.
+// (2) revision defect: a resolvable-but-IRRELEVANT evidence_ref let an invented/absent entity become a
+//     false CONTRADICTED (fixture syn-invented-place-zarnuth). A reference must not only RESOLVE, it must
+//     be RELEVANT to the material entity the component is about.
 //
-// Decision states (project-neutral): CONTRADICTED, SUPPORTED, INSUFFICIENT_EVIDENCE, AMBIGUOUS,
-// NOT_APPLICABLE, ADJUDICATION_ERROR.
+// The gate computes an EVIDENCE-FIRST decision from the model's STRUCTURED fields (never the model's own
+// final label, never confidence). Decision states: CONTRADICTED, SUPPORTED, INSUFFICIENT_EVIDENCE,
+// AMBIGUOUS, NOT_APPLICABLE, ADJUDICATION_ERROR.
 //
-// Core rule: a claim is SUPPORTED only when the retrieved authority AFFIRMATIVELY supports every
-// material component (each with a resolvable evidence reference) AND the source addresses the claim.
-// Absence of contradictory evidence is NOT affirmative support. Confidence is advisory metadata only.
+// Core rule: SUPPORTED requires that every material component is AFFIRMATIVELY supported by a resolvable
+// AND relevant authoritative record, and the source addresses the claim. A CONTRADICTED verdict requires
+// affirmative contradictory evidence that is resolvable AND relevant to the claimed entity. An entity
+// absent from the map routes to INSUFFICIENT_EVIDENCE; absence never becomes contradiction.
 //
-// This is pure and side-effect free. It never edits prose, canon, or the map.
+// Pure and side-effect free. Never edits prose, canon, or the map.
 
 export const DECISION_STATES = [
   'CONTRADICTED', 'SUPPORTED', 'INSUFFICIENT_EVIDENCE', 'AMBIGUOUS', 'NOT_APPLICABLE', 'ADJUDICATION_ERROR',
 ];
 const COMPONENT_STATES = ['supported', 'contradicted', 'unresolved', 'not_applicable'];
 
-// Map a decision state into the prose-audit evidence taxonomy (see PROSE_AUDIT_CAPABILITY_SPEC.md B/J).
 export function toEvidenceState(decision) {
   switch (decision) {
-    case 'CONTRADICTED': return 'LIKELY';            // LLM-adjudicated; deterministic corroboration could raise to VERIFIED
-    case 'SUPPORTED': return 'VERIFIED';             // reached only after the deterministic sufficiency invariants pass
+    case 'CONTRADICTED': return 'LIKELY';
+    case 'SUPPORTED': return 'VERIFIED';
     case 'INSUFFICIENT_EVIDENCE': return 'NEEDS_REVIEW';
     case 'AMBIGUOUS': return 'NEEDS_REVIEW';
     case 'NOT_APPLICABLE': return 'FALSE_POSITIVE_RISK';
@@ -33,41 +35,77 @@ export function toEvidenceState(decision) {
   }
 }
 
-// Structured rationale-insufficiency backstop (invariant 2). Prefer structured coverage fields; this is
-// a secondary catch for the exact v1 defect (rationale said "unverifiable" while the verdict claimed
-// support). Applied ONLY to downgrade a would-be SUPPORTED, never to upgrade anything.
 const INSUFFICIENCY_RE = /\b(insufficient|unverifiable|not specif|does not specif|doesn't specif|silent|unknown|ambiguous|cannot (?:confirm|verify)|can't (?:confirm|verify)|no (?:evidence|information|record)|neither confirm)/i;
 export function rationaleFlagsInsufficiency(rationale) {
   return typeof rationale === 'string' && INSUFFICIENCY_RE.test(rationale);
 }
 
-function resolvable(ref, mapIndex) {
-  return typeof ref === 'string' && ref.length > 0 && (mapIndex.places.has(ref) || mapIndex.routes.has(ref));
+// Normalize an entity name for deterministic matching: lowercase, drop a leading "the", strip
+// punctuation, collapse whitespace. "the Luthan Mountains" -> "luthan mountains".
+// Hyphens/underscores are normalized to spaces so a kebab id ("great-western-road") and a spoken name
+// ("Great Western Road") match. Then drop a leading "the", strip other punctuation, collapse whitespace.
+function normName(s) {
+  return String(s || '').toLowerCase().replace(/[-_]/g, ' ').replace(/^the\s+/, '').replace(/[^a-z0-9 ]/g, '').replace(/\s+/g, ' ').trim();
 }
 
-function buildIndex(mapContext) {
-  return {
-    places: new Set((mapContext?.places || []).map((p) => p.place_id)),
-    routes: new Set((mapContext?.routes || []).map((r) => r.route_id)),
-  };
+export function buildIndex(mapContext) {
+  const places = mapContext?.places || [];
+  const routes = mapContext?.routes || [];
+  const placesById = Object.fromEntries(places.map((p) => [p.place_id, p]));
+  const routesById = Object.fromEntries(routes.map((r) => [r.route_id, r]));
+  const nameToIds = {}; // normalized name/alias -> Set(place_id | route_id)
+  for (const p of places) {
+    for (const nm of [p.place_id, p.canonical_name, ...(p.aliases || [])]) {
+      const k = normName(nm);
+      if (k) (nameToIds[k] ||= new Set()).add(p.place_id);
+    }
+  }
+  // Named routes (roads, sea routes) are material entities too, so a component about "the Great Western
+  // Road" resolves to its route_id instead of failing entity-presence.
+  for (const r of routes) {
+    for (const nm of [r.route_id, r.name].filter(Boolean)) {
+      const k = normName(nm);
+      if (k) (nameToIds[k] ||= new Set()).add(r.route_id);
+    }
+  }
+  return { placeIds: new Set(places.map((p) => p.place_id)), routeIds: new Set(routes.map((r) => r.route_id)), placesById, routesById, nameToIds };
+}
+
+function resolvable(ref, idx) {
+  return typeof ref === 'string' && ref.length > 0 && (idx.placeIds.has(ref) || idx.routeIds.has(ref));
+}
+
+// Resolve a claimed entity NAME to map place ids. [] = absent/invented, [x] = unique, [x,y,...] = a
+// shared/ambiguous alias. Deterministic name/alias matching only; NOT semantic similarity.
+export function resolveEntity(name, idx) {
+  const set = idx.nameToIds[normName(name)];
+  return set ? [...set] : [];
+}
+
+// Is evidence_ref RELEVANT to the resolved entity place? Relevant when the ref IS the entity, is a route
+// with the entity as an endpoint, or is a place in a documented containment/adjacency relation with it.
+// This is what stops a resolvable-but-unrelated ref (e.g. citing "cirshe" to contradict invented "Zarnuth").
+export function refRelevant(entityPlaceId, ref, idx) {
+  if (ref === entityPlaceId) return true;
+  const route = idx.routesById[ref];
+  if (route && (route.from_place === entityPlaceId || route.to_place === entityPlaceId)) return true;
+  const P = idx.placesById[entityPlaceId];
+  const R = idx.placesById[ref];
+  if (P && (P.contained_by === ref || (P.adjacency || []).includes(ref))) return true;
+  if (R && (R.contained_by === entityPlaceId || (R.adjacency || []).includes(entityPlaceId))) return true;
+  return false;
 }
 
 // gate(modelOutput, mapContext) -> { decision_state, evidence_state, invariants_applied[], reasons[], coverage }
-// modelOutput contract (produced by the adjudicator model, validated here):
-//   claim_components: [{ component, status, evidence_ref, note }]
-//   source_addresses_claim: boolean
-//   figurative: boolean
-//   ambiguous: boolean
-//   confidence: number (advisory only)
-//   rationale: string
+// modelOutput.claim_components: [{ component, status, entity, evidence_ref, note }]
+//   entity: the primary named place/feature the component is ABOUT (required for a supported/contradicted
+//   verdict to stand; missing entity on a decisive component fails closed).
 export function gate(modelOutput, mapContext) {
   const invariants = [];
   const reasons = [];
   const done = (decision) => ({
-    decision_state: decision,
-    evidence_state: toEvidenceState(decision),
-    invariants_applied: invariants,
-    reasons,
+    decision_state: decision, evidence_state: toEvidenceState(decision),
+    invariants_applied: [...new Set(invariants)], reasons,
     coverage: Array.isArray(modelOutput?.claim_components) ? modelOutput.claim_components : [],
   });
 
@@ -75,66 +113,59 @@ export function gate(modelOutput, mapContext) {
   if (!modelOutput || typeof modelOutput !== 'object') { invariants.push('fail-closed'); reasons.push('no model output'); return done('ADJUDICATION_ERROR'); }
   const comps = modelOutput.claim_components;
   if (!Array.isArray(comps) || comps.length === 0) { invariants.push('fail-closed'); reasons.push('missing/empty claim_components'); return done('ADJUDICATION_ERROR'); }
-  if (typeof modelOutput.source_addresses_claim !== 'boolean' || typeof modelOutput.figurative !== 'boolean') {
-    invariants.push('fail-closed'); reasons.push('missing boolean fields'); return done('ADJUDICATION_ERROR');
-  }
-  for (const c of comps) {
-    if (!c || !COMPONENT_STATES.includes(c.status)) { invariants.push('fail-closed'); reasons.push('bad component status'); return done('ADJUDICATION_ERROR'); }
-  }
+  if (typeof modelOutput.source_addresses_claim !== 'boolean' || typeof modelOutput.figurative !== 'boolean') { invariants.push('fail-closed'); reasons.push('missing boolean fields'); return done('ADJUDICATION_ERROR'); }
+  for (const c of comps) { if (!c || !COMPONENT_STATES.includes(c.status)) { invariants.push('fail-closed'); reasons.push('bad component status'); return done('ADJUDICATION_ERROR'); } }
+
   const idx = buildIndex(mapContext);
 
-  // Internal inconsistency: same evidence_ref asserted both supported and contradicted (conflicting authority).
+  // Conflicting authority: same evidence_ref asserted both supported and contradicted -> fail closed.
   const byRef = {};
-  for (const c of comps) {
-    if (!c.evidence_ref) continue;
-    (byRef[c.evidence_ref] ||= new Set()).add(c.status);
-  }
+  for (const c of comps) { if (c.evidence_ref) (byRef[c.evidence_ref] ||= new Set()).add(c.status); }
   for (const [ref, statuses] of Object.entries(byRef)) {
-    if (statuses.has('supported') && statuses.has('contradicted')) {
-      invariants.push('fail-closed'); reasons.push(`conflicting authority on ${ref}`); return done('ADJUDICATION_ERROR');
-    }
+    if (statuses.has('supported') && statuses.has('contradicted')) { invariants.push('fail-closed'); reasons.push(`conflicting authority on ${ref}`); return done('ADJUDICATION_ERROR'); }
   }
 
-  // Invariant 3 - a contradiction only stands with a resolvable authoritative reference.
-  const realContradictions = comps.filter((c) => c.status === 'contradicted' && resolvable(c.evidence_ref, idx));
-  const unresolvableContradictions = comps.filter((c) => c.status === 'contradicted' && !resolvable(c.evidence_ref, idx));
-  if (realContradictions.length > 0) {
-    invariants.push('evidence-reference');
-    reasons.push(`contradicted with resolvable evidence: ${realContradictions.map((c) => c.evidence_ref).join(',')}`);
-    return done('CONTRADICTED');
+  // --- Evidence-reference RELEVANCE / entity-presence pre-pass (the revision fix) ---
+  // Every supported/contradicted component must name a material entity that (a) exists on the map and
+  // (b) is the thing its evidence_ref actually addresses. Otherwise reclassify it to `unresolved` so it
+  // can neither support nor contradict. Absence and irrelevance never become a decision.
+  let entityAmbiguous = false;
+  const eff = comps.map((c) => ({ ...c }));
+  for (const c of eff) {
+    if (c.status !== 'supported' && c.status !== 'contradicted') continue;
+    if (typeof c.entity !== 'string' || !c.entity.trim()) { c.status = 'unresolved'; c._relevance = 'missing-entity-metadata'; invariants.push('reference-relevance'); continue; }
+    const ids = resolveEntity(c.entity, idx);
+    if (ids.length === 0) { c.status = 'unresolved'; c._relevance = 'entity-absent'; invariants.push('entity-presence'); continue; }
+    if (ids.length > 1) { entityAmbiguous = true; c.status = 'unresolved'; c._relevance = 'shared-alias'; invariants.push('reference-relevance'); continue; }
+    if (!resolvable(c.evidence_ref, idx) || !refRelevant(ids[0], c.evidence_ref, idx)) { c.status = 'unresolved'; c._relevance = 'irrelevant-evidence'; invariants.push('reference-relevance'); continue; }
+    // resolved + relevant: the component's evidence stands.
   }
 
-  // Invariant 6 - figurative / non-geographic language is not a contradiction; nothing contradicted stands.
+  // Invariant 6 - figurative / non-geographic language is not a geographic claim, so it can never be a
+  // contradiction. Checked BEFORE the contradiction check so that a model which flags figurative AND
+  // (inconsistently) marks a component contradicted still resolves to NOT_APPLICABLE, not a false
+  // CONTRADICTED.
   if (modelOutput.figurative === true) { invariants.push('figurative'); reasons.push('figurative/non-geographic language'); return done('NOT_APPLICABLE'); }
 
-  // Affirmative support: every component supported, each with a resolvable ref, and the source addresses the claim.
-  const allSupportedWithRef = comps.every((c) => c.status === 'supported' && resolvable(c.evidence_ref, idx));
-  const anyUnresolved = comps.some((c) => c.status === 'unresolved');
-  if (allSupportedWithRef && modelOutput.source_addresses_claim === true && !anyUnresolved) {
-    // Invariant 2 - rationale/verdict consistency: a "supported" verdict whose rationale declares
-    // missing/ambiguous/unverifiable evidence is downgraded (structured coverage was clean, but the
-    // free-text rationale contradicts it, so fail closed rather than assert support).
-    if (rationaleFlagsInsufficiency(modelOutput.rationale)) {
-      invariants.push('rationale-verdict-consistency'); reasons.push('rationale declares insufficient/ambiguous evidence despite a supported verdict');
-      return done('INSUFFICIENT_EVIDENCE');
-    }
-    invariants.push('affirmative-support');
-    reasons.push('all components supported with resolvable evidence and source addresses the claim');
-    return done('SUPPORTED');
+  // Invariant 3 - a contradiction only stands with resolvable AND relevant evidence (post pre-pass).
+  const realContradictions = eff.filter((c) => c.status === 'contradicted' && resolvable(c.evidence_ref, idx));
+  if (realContradictions.length > 0) { invariants.push('evidence-reference'); reasons.push(`contradicted with relevant evidence: ${realContradictions.map((c) => c.evidence_ref).join(',')}`); return done('CONTRADICTED'); }
+
+  // Affirmative support: every component supported with a resolvable+relevant ref, source addresses claim.
+  const allSupported = eff.every((c) => c.status === 'supported' && resolvable(c.evidence_ref, idx));
+  const anyUnresolved = eff.some((c) => c.status === 'unresolved');
+  if (allSupported && modelOutput.source_addresses_claim === true && !anyUnresolved) {
+    if (rationaleFlagsInsufficiency(modelOutput.rationale)) { invariants.push('rationale-verdict-consistency'); reasons.push('rationale declares insufficient/ambiguous evidence despite a supported verdict'); return done('INSUFFICIENT_EVIDENCE'); }
+    invariants.push('affirmative-support'); reasons.push('all components supported with relevant evidence and source addresses the claim'); return done('SUPPORTED');
   }
 
-  // Invariant 1 - source silence: the source does not address the claim -> cannot be supported.
-  if (modelOutput.source_addresses_claim === false) {
-    invariants.push('source-silence'); reasons.push('authority does not address the claim'); return done('INSUFFICIENT_EVIDENCE');
-  }
-  // Genuine reading ambiguity (source present, claim admits multiple readings).
+  // A shared/ambiguous alias entity defers to a human (rather than guessing or erroring).
+  if (entityAmbiguous) { invariants.push('ambiguity'); reasons.push('shared/ambiguous alias entity'); return done('AMBIGUOUS'); }
+  // Invariant 1 - source silence.
+  if (modelOutput.source_addresses_claim === false) { invariants.push('source-silence'); reasons.push('authority does not address the claim'); return done('INSUFFICIENT_EVIDENCE'); }
+  // Genuine reading ambiguity (source present, multiple readings).
   if (modelOutput.ambiguous === true) { invariants.push('ambiguity'); reasons.push('genuine reading ambiguity'); return done('AMBIGUOUS'); }
   // Invariant 4 - coverage: an unresolved material component means not fully supported.
-  if (anyUnresolved) { invariants.push('coverage'); reasons.push('unresolved material component'); return done('INSUFFICIENT_EVIDENCE'); }
-  // A claimed contradiction without a resolvable reference cannot stand as CONTRADICTED (invariant 3).
-  if (unresolvableContradictions.length > 0) {
-    invariants.push('evidence-reference'); reasons.push('contradiction lacked a resolvable authoritative reference'); return done('INSUFFICIENT_EVIDENCE');
-  }
-  // Default: fail closed to insufficient rather than inventing a clean result.
+  if (anyUnresolved) { invariants.push('coverage'); reasons.push('unresolved material component (absent/irrelevant/silent)'); return done('INSUFFICIENT_EVIDENCE'); }
   invariants.push('fail-closed'); reasons.push('no affirmative support established'); return done('INSUFFICIENT_EVIDENCE');
 }
